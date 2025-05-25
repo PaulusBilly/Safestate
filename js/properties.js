@@ -1,4 +1,3 @@
-// Show notification function
 function showNotification(message, type = "info") {
   const notification = document.getElementById("notification");
   const messageElement = notification.querySelector(".notification-message");
@@ -24,9 +23,7 @@ function hideNotification() {
   }, 300);
 }
 
-// Initialize properties page
 document.addEventListener("DOMContentLoaded", async () => {
-  // Check if user is logged in
   const currentUser = getCurrentUser();
   if (!currentUser) {
     showNotification("Please log in to view your properties", "warning");
@@ -36,15 +33,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Make sure properties arrays are initialized
   await ensureUserPropertiesInitialized();
 
-  // Initialize navigation if available
   if (typeof updateNavigation === "function") {
     updateNavigation();
   }
 
-  // Set up filter panel toggle
   const filterIcon = document.querySelector(".toggle-filter");
   const filterPanel = document.querySelector(".filter-panel");
 
@@ -54,17 +48,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Load and display owned properties
   await displayOwnedProperties();
 
-  // Load and display rented properties
   await displayRentedProperties();
 
-  // Set up search functionality
   setupSearch();
 });
 
-// Display owned properties
 async function displayOwnedProperties() {
   const ownedProperties = await getUserOwnedProperties();
   const container = document.getElementById("properties-container");
@@ -75,7 +65,6 @@ async function displayOwnedProperties() {
   }
 
   if (ownedProperties.length > 0) {
-    // Create owned properties section
     const ownedSection = document.createElement("div");
     ownedSection.className = "properties-section";
     ownedSection.innerHTML = "<h2>Owned Properties</h2>";
@@ -85,13 +74,11 @@ async function displayOwnedProperties() {
     ownedGrid.className = "properties-grid";
     ownedSection.appendChild(ownedGrid);
 
-    // Create property cards
     ownedProperties.forEach((property) => {
       const card = createPropertyCard(property, "OWNED");
       ownedGrid.appendChild(card);
     });
   } else {
-    // No owned properties
     const ownedSection = document.createElement("div");
     ownedSection.className = "properties-section";
     ownedSection.innerHTML = `
@@ -105,7 +92,6 @@ async function displayOwnedProperties() {
   }
 }
 
-// Display rented properties
 async function displayRentedProperties() {
   const rentedProperties = await getUserRentedProperties();
   const container = document.getElementById("properties-container");
@@ -116,7 +102,6 @@ async function displayRentedProperties() {
   }
 
   if (rentedProperties.length > 0) {
-    // Create rented properties section
     const rentedSection = document.createElement("div");
     rentedSection.className = "properties-section";
     rentedSection.innerHTML = "<h2>Rented Properties</h2>";
@@ -126,13 +111,11 @@ async function displayRentedProperties() {
     rentedGrid.className = "properties-grid";
     rentedSection.appendChild(rentedGrid);
 
-    // Create property cards
     rentedProperties.forEach((property) => {
       const card = createPropertyCard(property, "RENTED");
       rentedGrid.appendChild(card);
     });
   } else {
-    // No rented properties
     const rentedSection = document.createElement("div");
     rentedSection.className = "properties-section";
     rentedSection.innerHTML = `
@@ -146,32 +129,25 @@ async function displayRentedProperties() {
   }
 }
 
-// Create a property card element
 function createPropertyCard(property, status) {
   const card = document.createElement("div");
   card.className = "property-card";
 
-  // Make the card clickable to show property details
   card.style.cursor = "pointer";
   card.addEventListener("click", () => {
     window.location.href = `propertiesdetails.html?id=${property.id}`;
   });
 
-  // Calculate random contract end date for rented properties (for demo purposes)
   let contractEndsIn = "";
   if (status === "RENTED") {
-    // Random number between 7 and 365 days
     const daysRemaining = Math.floor(Math.random() * 359) + 7;
     contractEndsIn = `<p class="contract">Contract ends in: ${daysRemaining} days</p>`;
   }
 
-  // Format price display based on status
   let priceDisplay;
   if (status === "OWNED") {
-    // For owned properties, always show the full price
     priceDisplay = formatRupiah(property.price);
   } else {
-    // For rented properties, show the monthly price if available
     priceDisplay = property.pricePerMonth
       ? `${formatRupiah(property.pricePerMonth)}/month`
       : formatRupiah(property.price);
@@ -205,7 +181,6 @@ function createPropertyCard(property, status) {
   return card;
 }
 
-// Set up search functionality
 function setupSearch() {
   const searchInput = document.querySelector(".search-wrapper input");
   if (!searchInput) return;
@@ -215,17 +190,14 @@ function setupSearch() {
     const allProperties = await getAllUserProperties();
     const container = document.getElementById("properties-container");
 
-    // Clear previous results
     container.innerHTML = "";
 
     if (searchTerm.length === 0) {
-      // Reset to default view if search is cleared
       await displayOwnedProperties();
       await displayRentedProperties();
       return;
     }
 
-    // Filter properties based on search term
     const filteredProperties = allProperties.filter((property) => {
       return (
         property.name.toLowerCase().includes(searchTerm) ||
@@ -234,7 +206,6 @@ function setupSearch() {
       );
     });
 
-    // Display search results
     const searchSection = document.createElement("div");
     searchSection.className = "properties-section";
     searchSection.innerHTML = `<h2>Search Results (${filteredProperties.length})</h2>`;
@@ -260,7 +231,6 @@ function setupSearch() {
   });
 }
 
-// Function to redirect to marketplace with filters applied
 function redirectToMarketplace() {
   const priceFilter = document.getElementById("marketplacePrice").value;
   const sizeFilter = document.getElementById("marketplaceSize").value;

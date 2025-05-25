@@ -76,7 +76,6 @@ async function initializePaymentPage() {
     });
   }
 
-  // Check if property is for rent or sale and initialize accordingly
   if (property.status === "FOR_RENT") {
     initializeRentalPayment(property);
   } else {
@@ -96,7 +95,6 @@ function initializeRentalPayment(property) {
     propertyPriceElement.textContent = formatRupiah(monthlyRent) + "/month";
   }
 
-  // Update payment options for rental - show breakdown directly without radio button
   const paymentOptionsContainer = document.querySelector(".payment-options");
   if (paymentOptionsContainer) {
     paymentOptionsContainer.innerHTML = `
@@ -160,22 +158,18 @@ function initializePurchasePayment(property) {
         amt5x
       )} each`;
     }
-  } // Modify payment options to add "Earnest Money" before "Down Payment"
+  }
   const paymentOptionsContainer = document.querySelector(".payment-options");
   if (paymentOptionsContainer) {
-    // Get or create the Down Payment option for reference
     const downPaymentOption =
       paymentOptionsContainer.querySelector(".payment-option");
 
-    // Get the original title
     const originalTitle = paymentOptionsContainer.querySelector("h3");
 
-    // Create a container div for payment options if needed
     let paymentOptionsWrapper = paymentOptionsContainer.querySelector(
       ".payment-options-wrapper"
     );
     if (!paymentOptionsWrapper) {
-      // Remove the existing down payment option and title
       if (downPaymentOption) {
         downPaymentOption.remove();
       }
@@ -183,16 +177,13 @@ function initializePurchasePayment(property) {
         originalTitle.remove();
       }
 
-      // Create a wrapper for the options
       paymentOptionsWrapper = document.createElement("div");
       paymentOptionsWrapper.className = "payment-options-wrapper";
 
-      // Create the title first now
       const titleElement = document.createElement("h3");
       titleElement.textContent = "Payment Options";
       paymentOptionsWrapper.appendChild(titleElement);
 
-      // Create Earnest Money option after the title
       const earnestMoneyDiv = document.createElement("div");
       earnestMoneyDiv.className = "payment-option";
       earnestMoneyDiv.innerHTML = `
@@ -200,7 +191,6 @@ function initializePurchasePayment(property) {
         <input type="radio" name="payment" id="earnestMoneyRadio" />
       `;
 
-      // Create Down Payment option
       const newDownPaymentDiv = document.createElement("div");
       newDownPaymentDiv.className = "payment-option";
       newDownPaymentDiv.innerHTML = `
@@ -208,17 +198,14 @@ function initializePurchasePayment(property) {
         <input type="radio" name="payment" id="downPaymentRadio" />
       `;
 
-      // Add options to wrapper in the desired order
       paymentOptionsWrapper.appendChild(earnestMoneyDiv);
       paymentOptionsWrapper.appendChild(newDownPaymentDiv);
 
-      // Add wrapper to container
       paymentOptionsContainer.insertBefore(
         paymentOptionsWrapper,
         paymentOptionsContainer.firstChild.nextSibling
       );
 
-      // Create Earnest Money details section
       const earnestMoneyDetails = document.createElement("div");
       earnestMoneyDetails.id = "earnestMoneyDetails";
       earnestMoneyDetails.className = "down-payment-details hidden";
@@ -253,7 +240,7 @@ function setupRentalPaymentListeners(property) {
   let selectedRentalMethod = null;
 
   const monthlyRent = property.pricePerMonth || property.price;
-  const totalAmount = monthlyRent * 2; // Security deposit + first month
+  const totalAmount = monthlyRent * 2;
 
   function updateTotalPayment() {
     if (totalPaymentElement) {
@@ -274,10 +261,8 @@ function setupRentalPaymentListeners(property) {
     }
   }
 
-  // Initialize the total payment display immediately
   updateTotalPayment();
 
-  // Add event listeners to rental method options
   setTimeout(() => {
     const rentalMethods = document.querySelectorAll(
       'input[name="rentalMethod"]'
@@ -331,7 +316,6 @@ function setupRentalPaymentListeners(property) {
         const urlParams = new URLSearchParams(window.location.search);
         const propertyId = urlParams.get("id");
 
-        // Update rental receipt details
         const rentalMethodInput = document.querySelector(
           'input[name="rentalMethod"]:checked'
         );
@@ -388,7 +372,6 @@ function setupPaymentListeners(propertyPrice) {
   const dpAmountOptions = document.querySelectorAll('input[name="dpAmount"]');
   const dpMethodOptions = document.querySelectorAll('input[name="dpMethod"]');
 
-  // Store these in global scope for the confirm button
   window.paymentData = {
     selectedPayment: null,
     selectedDpAmount: null,
@@ -436,14 +419,12 @@ function setupPaymentListeners(propertyPrice) {
     }
   }
 
-  // Function to hide all payment details
   function hideAllPaymentDetails() {
     if (downPaymentDetails) downPaymentDetails.classList.add("hidden");
     const earnestMoneyDetails = document.getElementById("earnestMoneyDetails");
     if (earnestMoneyDetails) earnestMoneyDetails.classList.add("hidden");
   }
 
-  // Handle Down Payment radio clicks
   if (downPaymentRadio) {
     downPaymentRadio.addEventListener("click", () => {
       if (window.paymentData.selectedPayment === "downPayment") {
@@ -460,7 +441,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   }
 
-  // Handle Earnest Money radio clicks
   if (earnestMoneyRadio) {
     earnestMoneyRadio.addEventListener("click", () => {
       const earnestMoneyDetails = document.getElementById(
@@ -480,7 +460,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   }
 
-  // Add event listeners for Down Payment amount options
   dpAmountOptions.forEach((option) => {
     option.addEventListener("change", () => {
       window.paymentData.selectedDpAmount = option.value;
@@ -488,7 +467,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   });
 
-  // Add event listeners for Earnest Money payment method options
   setTimeout(() => {
     const emMethodOptions = document.querySelectorAll('input[name="emMethod"]');
     emMethodOptions.forEach((option) => {
@@ -575,9 +553,7 @@ function setupPaymentListeners(propertyPrice) {
         const propertyId = urlParams.get("id");
         const property = await getPropertyById(propertyId);
 
-        // Check if it's a rental or purchase and update receipt accordingly
         if (property && property.status === "FOR_RENT") {
-          // Find rental method from the page
           const rentalMethodInput = document.querySelector(
             'input[name="rentalMethod"]:checked'
           );
@@ -586,7 +562,6 @@ function setupPaymentListeners(propertyPrice) {
             : null;
           updateRentalReceiptDetails("deposit", rentalMethod);
         } else {
-          // Use the appropriate payment method based on the selected payment type
           updateReceiptDetails(
             window.paymentData.selectedPayment,
             window.paymentData.selectedDpAmount,
@@ -600,7 +575,6 @@ function setupPaymentListeners(propertyPrice) {
 
         if (currentUser && propertyId) {
           try {
-            // Get the property to check if it's for rent or sale
             const propertyType =
               property && property.status === "FOR_RENT" ? "rented" : "owned";
 
@@ -651,7 +625,6 @@ function updateReceiptDetails(paymentType, dpAmount, dpMethod) {
   if (receiptInputs.length >= 7) {
     receiptInputs[0].value = currentDate;
 
-    // Update payment type based on what was selected
     if (paymentType === "downPayment") {
       receiptInputs[1].value = "Down Payment";
       receiptInputs[2].value =
@@ -662,7 +635,6 @@ function updateReceiptDetails(paymentType, dpAmount, dpMethod) {
           : "Not Specified";
     } else if (paymentType === "earnestMoney") {
       receiptInputs[1].value = "Earnest Money";
-      // Check emMethod value using the global payment data object
       const emMethod = window.paymentData.selectedEmMethod;
       receiptInputs[2].value =
         emMethod === "credit"

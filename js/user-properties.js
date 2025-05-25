@@ -5,10 +5,8 @@ async function getUserOwnedProperties() {
   }
 
   const properties = await loadProperties();
-  return properties.filter(
-    (property) =>
-      currentUser.ownedProperties.includes(property.id) &&
-      property.status === "OWNED"
+  return properties.filter((property) =>
+    currentUser.ownedProperties.includes(property.id)
   );
 }
 
@@ -19,10 +17,8 @@ async function getUserRentedProperties() {
   }
 
   const properties = await loadProperties();
-  return properties.filter(
-    (property) =>
-      currentUser.rentedProperties.includes(property.id) &&
-      property.status === "RENTED"
+  return properties.filter((property) =>
+    currentUser.rentedProperties.includes(property.id)
   );
 }
 

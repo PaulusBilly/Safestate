@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id="notification" class="notification hidden">
+      <div class="notification-content">
+        <i class="notification-icon"></i>
+        <span class="notification-message"></span>
+        <button class="notification-close">&times;</button>
+      </div>
+    </div>
+
     <div class="navigation">
         <div class="navBar">
           <div class="nav-left">
@@ -64,27 +72,10 @@
         <span class="cart-badge" id="favoriteCount">3</span>
       </a>
     </div>
-
-    <div class="property-card" style="display: none;">
-      <div class="property-image">
-        <div class="property-meta">
-          <span><i class="fa-solid fa-bed"></i> 3</span>
-          <span><i class="fa-solid fa-toilet"></i> 2</span> 
-        </div>
-      </div>
-      <div class="property-details">
-        <small class="status">RENTED</small>
-        <h3 class="name">Property Name</h3>
-        <p class="location">Location</p>
-        <p class="contract">Contract ends in: 13 Days</p>
-        <p class="price">Rp1.400.000/month</p>
-      </div>
-      <div class="property-action">
-        <a href="propertiesdetails.html"><button class="details-btn">Details</button></a>
-      </div>
-    </div>
     
-    <div id="properties-container" class="properties-grid">
+    <!-- Main container for property sections -->
+    <div id="properties-container">
+      <!-- Property sections (owned and rented) will be inserted here by JavaScript -->
     </div>
     
     <div class="filter-panel">
@@ -120,83 +111,15 @@
         <button class="apply-filter" onclick="redirectToMarketplace()">Browse Marketplace</button>
         </div>
 
-<div class="overlay" id="propertyOverlay">
-  <div class="overlay-content">
-    <button class="close-overlay" onclick="closeOverlay()"><i class="fas fa-times"></i></button>
-    <div class="overlay-body">
-      <div class="overlay-left">
-        <img src="https://via.placeholder.com/400x300" alt="Property Image" class="main-image" />
-        <div class="image-thumbnails">
-          <img src="https://via.placeholder.com/100" alt="Thumbnail" />
-          <img src="https://via.placeholder.com/100" alt="Thumbnail" />
-          <img src="https://via.placeholder.com/100" alt="Thumbnail" />
-        </div>
-      </div>
-      <div class="overlay-right">
-        <small class="label">Label</small>
-        <h2 class="property-title">Property Name</h2>
-        <p class="published-date">Published on</p>
-        <p class="location">Location</p>
-        <p class="description">Short description</p>
-        <p class="price"><strong>Rp 2.500.000.000</strong></p>
-        <div class="agent-contact">
-          <div class="agent-info">
-            <img src="agent-photo.jpg" alt="Agent" class="agent-photo" />
-            <div class="agent-details">
-              <strong>Paulus Billiardo Putrakedua</strong>
-              <small>Billiardo Enterprise</small>
-            </div>
-          </div>
-          <a href="https://wa.me/6281807216060" target="_blank" class="whatsapp-btn">
-            Direct to WhatsApp
-          </a>
-        </div>
-        <div class="secondary-cta">
-          <button class="cta-btn add-to-favorites">
-            <i class="fas fa-heart"></i>Add to Favorites
-          </button>
-          <button class="cta-btn buy-now">
-            Buy Now
-          </button>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="property-details-tables">
-      <h3>Specification</h3>
-      <table>
-        <tr><th>Luas Tanah</th><td>120 m²</td><th>Sertifikat</th><td>SHM</td></tr>
-        <tr><th>Luas Bangunan</th><td>90 m²</td><th>Daya Listrik</th><td>2200 Watt</td></tr>
-        <tr><th>Tipe Properti</th><td>Rumah</td><th>Jumlah Lantai</th><td>2</td></tr>
-        <tr><th>Bedrooms</th><td>3</td><th>Bathrooms</th><td>2</td></tr>
-      </table>
-
-      <h3>Facility</h3>
-      <table>
-        <tr><th>Swimming Pool</th><td>Yes</td><th>Gym</th><td>No</td></tr>
-        <tr><th>Security 24/7</th><td>Yes</td><th>Playground</th><td>Yes</td></tr>
-        <tr><th>Parking Space</th><td>Yes</td><th>Internet</th><td>Yes</td></tr>
-      </table>
-
-      <h3>Nearby Attraction</h3>
-      <table>
-        <tr><th>Shopping Mall</th><td>5 mins drive</td><th>City Park</th><td>10 mins walk</td></tr>
-        <tr><th>Hospital</th><td>8 mins drive</td><th>School</th><td>4 mins walk</td></tr>
-        <tr><th>Train Station</th><td>15 mins drive</td><th>Supermarket</th><td>2 mins walk</td></tr>
-      </table>
-    </div>
-  </div>
-</div>
+<!-- Removed property overlay as it's no longer needed -->
 
 </body>
 <script src="js/auth.js"></script>
 <script src="js/navbar.js"></script>
 <script src="js/searchbar.js"></script>
 <script src="js/data.js"></script>
-<script src="js/auth.js"></script>
 <script src="js/favorites.js"></script>
 <script src="js/user-properties.js"></script>
-<script src="js/property-display.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', async () => {
     await updateFavoritesCount();
@@ -207,74 +130,7 @@
         cartLink.href = 'favorites.html';
       }
     });
-    
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-      window.location.href = 'account.html';
-      return;
-    }
-    
-    if (!currentUser.ownedProperties) {
-      currentUser.ownedProperties = [];
-      await updateUserProfile(currentUser.id, { ownedProperties: currentUser.ownedProperties });
-    }
-    
-    if (!currentUser.boughtProperties) {
-      currentUser.boughtProperties = [];
-      await updateUserProfile(currentUser.id, { boughtProperties: currentUser.boughtProperties });
-    }
-    
-    if (!currentUser.rentedProperties) {
-      currentUser.rentedProperties = [];
-      await updateUserProfile(currentUser.id, { rentedProperties: currentUser.rentedProperties });
-    }
-    
-    const searchInput = document.querySelector('.search-wrapper input');
-    if (searchInput) {
-      searchInput.addEventListener('input', debounce(async () => {
-        const filterOptions = {
-          search: searchInput.value.trim()
-        };
-        await displayUserProperties('properties-container', filterOptions);
-      }, 300));
-    }
-    
-    const applyFilterBtn = document.querySelector('.apply-filter');
-    if (applyFilterBtn) {
-      applyFilterBtn.removeEventListener('click', () => {}); 
-    }
-    
-    await displayUserProperties('properties-container');
   });
-  
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      const context = this;
-      const args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        func.apply(context, args);
-      }, wait);
-    };
-  }
-
-  function redirectToMarketplace() {
-    const price = document.getElementById('marketplacePrice').value;
-    const size = document.getElementById('marketplaceSize').value;
-    const type = document.getElementById('marketplaceType').value;
-    const rentBuy = document.getElementById('marketplaceRentBuy').value;
-    
-    let url = 'marketplace.html?';
-    const params = [];
-    
-    if (price && price !== 'disabled') params.push(`price=${price}`);
-    if (size && size !== 'disabled') params.push(`size=${size}`);
-    if (type && type !== 'disabled') params.push(`type=${type}`);
-    if (rentBuy && rentBuy !== 'disabled') params.push(`rentbuy=${rentBuy}`);
-    
-    url += params.join('&');
-    window.location.href = url;
-  }
 </script>
+<script src="js/properties.js"></script>
 </html>

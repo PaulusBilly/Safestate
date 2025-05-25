@@ -196,20 +196,6 @@ body {
   border-radius: 12px;
 }
 
-.utj-details {
-  background-color: #eee;
-  padding: 24px;
-  margin: 12px 0;
-  border-radius: 12px;
-}
-
-.utj-description {
-  font-size: 14px;
-  color: #666;
-  margin-top: 8px;
-  font-style: italic;
-}
-
 .remaining-payment-info {
   font-size: 16px;
   margin-bottom: 15px;
@@ -448,4 +434,43 @@ body {
   .info-container {
     width: 100%;
   }
+}
+
+/* Rental Payment Styles */
+.rental-details {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.rental-details.hidden {
+  display: none;
+}
+
+.rental-details .calculation {
+  margin-bottom: 20px;
+}
+
+.rental-details .calculation p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.rental-details .calculation p:first-child {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.rental-details .calculation p:last-child {
+  color: #007bff;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #e9ecef;
 }

@@ -116,13 +116,18 @@ async function displayUserProperties(containerId, filterOptions = {}) {
   let properties = await loadProperties();
 
   properties = properties.filter((property) => {
-    const isOwned =
-      currentUser.ownedProperties.includes(property.id) &&
-      property.status === "OWNED";
-    const isRented =
-      currentUser.rentedProperties.includes(property.id) &&
-      property.status === "RENTED";
+    const isOwned = currentUser.ownedProperties.includes(property.id);
+    const isRented = currentUser.rentedProperties.includes(property.id);
     return isOwned || isRented;
+  });
+
+  properties = properties.map((property) => {
+    if (currentUser.ownedProperties.includes(property.id)) {
+      return { ...property, status: "OWNED" };
+    } else if (currentUser.rentedProperties.includes(property.id)) {
+      return { ...property, status: "RENTED" };
+    }
+    return property;
   });
 
   if (filterOptions.type) {
@@ -355,6 +360,12 @@ function updatePropertyStats(currentUser, allUserProperties) {
 
 function animateNumber(element, targetNumber) {
   const startNumber = parseInt(element.textContent) || 0;
+
+  if (startNumber === targetNumber) {
+    element.textContent = targetNumber;
+    return;
+  }
+
   const increment = targetNumber > startNumber ? 1 : -1;
   const stepTime =
     Math.abs(Math.floor(300 / (targetNumber - startNumber))) || 50;

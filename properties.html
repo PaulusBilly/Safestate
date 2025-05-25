@@ -215,17 +215,17 @@
     }
     
     if (!currentUser.ownedProperties) {
-      currentUser.ownedProperties = ["prop-001", "prop-004"];
+      currentUser.ownedProperties = [];
       await updateUserProfile(currentUser.id, { ownedProperties: currentUser.ownedProperties });
     }
     
     if (!currentUser.boughtProperties) {
-      currentUser.boughtProperties = ["prop-006", "prop-020"];
+      currentUser.boughtProperties = [];
       await updateUserProfile(currentUser.id, { boughtProperties: currentUser.boughtProperties });
     }
     
     if (!currentUser.rentedProperties) {
-      currentUser.rentedProperties = ["prop-024"];
+      currentUser.rentedProperties = [];
       await updateUserProfile(currentUser.id, { rentedProperties: currentUser.rentedProperties });
     }
     

@@ -88,3 +88,29 @@ async function addToUserRentedProperties(propertyId) {
 
   return await updateUserProfile(currentUser.id, { rentedProperties });
 }
+
+async function ensureUserPropertiesInitialized() {
+  const currentUser = getCurrentUser();
+  if (!currentUser) return;
+
+  if (!currentUser.ownedProperties) {
+    currentUser.ownedProperties = [];
+    await updateUserProfile(currentUser.id, {
+      ownedProperties: currentUser.ownedProperties,
+    });
+  }
+
+  if (!currentUser.boughtProperties) {
+    currentUser.boughtProperties = [];
+    await updateUserProfile(currentUser.id, {
+      boughtProperties: currentUser.boughtProperties,
+    });
+  }
+
+  if (!currentUser.rentedProperties) {
+    currentUser.rentedProperties = [];
+    await updateUserProfile(currentUser.id, {
+      rentedProperties: currentUser.rentedProperties,
+    });
+  }
+}

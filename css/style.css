@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+:root {
+    --primary-color: black;
+    --title-text: 40px;
+    --subtitle-text: 22px;
+    --paragraph-text: 1vw;
+    --text-dark: black;
+    --text-light: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Instrument Sans";
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: row;
+    padding: 0 60px;
+    width: 100%;
+}
+
+.leftSection {
+    width: 40%;
+    position: relative;
+    display: inline-block;
+}
+
+.leftSection .heroImg{
+    display: block;
+    height: 100vh;
+    width: 0 auto;
+}
+
+.leftSection .tagline {
+    font-size: var(--title-text);
+    color: var(--text-light);
+    text-shadow: 0 8px 8px rgb(47, 47, 47); 
+    position: absolute;
+    width: 300px;
+    top: 370px;
+    left: 60px;
+}
+
+.leftSection .tagline span {
+    font-weight: bold;
+}
+
+.rightSection {
+    width: 60%;
+    padding: 0 20px;
+}
+
+.rightSection .companyLogo {
+    float: right;
+    margin-top: 60px;
+}
+
+.rightSection .navigation {
+    margin-top: 240px;
+}
+
+.rightSection .navigation .navItem {
+   margin-top: 56px;
+}
+
+.rightSection .navigation .navItem .redirect {
+display: flex;
+flex-direction: column;
+text-decoration: none;
+color: var(--primary-color);
+transition: font-weight 0.3s ease;
+}
+
+.rightSection .navigation .navItem .redirect:hover {
+    font-weight: bolder;
+}
+
+.rightSection .navigation .navItem .redirect .link-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.rightSection .navigation .navItem .redirect .link-content span {
+    font-size: var(--subtitle-text);
+}
+
+.rightSection .navigation .navItem .redirect .link-content img {
+    width: 24px;
+}
+
+.redirect hr {
+width: 100%;
+border: 1px solid black;
+margin: 20px 0 0 0;
+}

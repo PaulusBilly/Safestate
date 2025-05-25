@@ -1,61 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Safestate</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="mainSection">
-        <div class="leftSection">
-            <div>
-                <img src="img/heroImg.jpg" alt="homeImg" class="heroImg">
-            </div>
-            <div class="tagline">
-                Simple.<br>
-                Trustworthy.<br>
-                <span>Where design meets its owner.</span>
-            </div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/navigation.css" />
+    <link rel="stylesheet" href="css/searchbar.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="navigation">
+      <div class="navBar">
+        <div class="nav-left">
+          <a href="marketplace.html">Marketplace</a>
+          <a href="properties.html">Properties</a>
         </div>
-        <div class="rightSection">
-            <div class="searchBar">
-                <input type="text" placeholder="Search">
-                <img src="" alt="searchIcon">
-            </div>
-            <div class="navigation">
-                <div class="navItem">
-                    <div>
-                        <p>Register</p>
-                        <img src="" alt="arrow">
-                    </div>
-                    <hr>
-                </div>
-                <div class="navItem">
-                    <div>
-                        <p>Our Agents</p>
-                        <img src="" alt="arrow">
-                    </div>
-                    <hr>
-                </div>
-                <div class="navItem">
-                    <div>
-                        <p>My Properties</p>
-                        <img src="" alt="arrow">
-                    </div>
-                    <hr>
-                </div>
-                <div class="navItem">
-                    <div>
-                        <p>Marketplace</p>
-                        <img src="" alt="arrow">
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <img src="" alt="logo">
+
+        <div class="nav-logo">
+          <a href="#" class="logo active">SAFESTATE</a>
         </div>
+
+        <div class="nav-right">
+          <a href="faq.html">FAQ</a>
+          <div class="cta">
+            <a href="account.html">Account</a>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+
+    <div class="hero-section">
+      <p class="title">
+        Simple. Trustworthy. <br />
+        <span style="font-weight: bold">Where design meets it owner.</span>
+      </p>
+      <div class="achievement-container">
+        <div class="achievement-card">
+          <h3>12.000+</h3>
+          <p>Happy Clients</p>
+        </div>
+        <div class="achievement-card">
+          <h3>3,420</h3>
+          <p>Properties Listed</p>
+        </div>
+        <div class="achievement-card">
+          <h3>4.9 <i class="fa-solid fa-star" style="color: gold"></i></h3>
+          <p>Overall Rating</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-wrapper">
+      <div class="icon-wrapper filter-icon">
+        <i class="fa fa-filter toggle-filter"></i>
+      </div>
+      <input
+        type="text"
+        placeholder="Search properties by location, price, or type"
+      />
+      <div class="icon-wrapper search-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <hr
+        style="
+          width: 1.2px;
+          height: 30px;
+          background-color: rgb(166, 166, 166);
+          border: none;
+          margin: 0 0.4rem;
+        "
+      />
+      <a href="favorites.html" class="icon-wrapper cart-icon">
+        <i class="fas fa-heart"></i>
+        <span class="cart-badge" id="favoriteCount">3</span>
+      </a>
+    </div>
+    <div class="filter-panel">
+      Filter by
+
+      <select>
+        <option disabled selected>Price</option>
+        <option value="low">Lowest</option>
+        <option value="high">Highest</option>
+      </select>
+
+      <select>
+        <option disabled selected>Size</option>
+        <option value="smallest">Smallest</option>
+        <option value="largest">Largest</option>
+      </select>
+
+      <select>
+        <option disabled selected>Type</option>
+        <option value="apartment">Apartment</option>
+        <option value="house">House</option>
+        <option value="land">Land</option>
+      </select>
+
+      <select>
+        <option disabled selected>Rent/Buy</option>
+        <option value="rent">Rent</option>
+        <option value="buy">Buy</option>
+      </select>
+
+      <hr
+        style="
+          width: 1.2px;
+          height: 30px;
+          background-color: rgb(166, 166, 166);
+          border: none;
+          margin: 0 0.4rem;
+        "
+      />
+
+      <button class="apply-filter">Apply</button>
+    </div>
+  </body>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/searchbar.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/favorites.js"></script>
+  <script>
+    // Initialize components
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Update favorites count
+      await updateFavoritesCount();
+
+      // Fix cart link to point to favorites.html
+      const cartLinks = document.querySelectorAll(".cart-icon");
+      cartLinks.forEach((cartLink) => {
+        if (cartLink) {
+          cartLink.href = "favorites.html";
+        }
+      });
+
+      // Initialize search and filter for index page
+      // Index page always navigates to marketplace when search/filter is applied
+    });
+  </script>
 </html>

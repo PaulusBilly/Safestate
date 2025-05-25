@@ -1,0 +1,16 @@
+[
+  {
+    "id": "user-001",
+    "username": "johndoe",
+    "email": "john@example.com",
+    "password": "password123",
+    "favorites": ["prop-001", "prop-003"]
+  },
+  {
+    "id": "user-002",
+    "username": "janedoe",
+    "email": "jane@example.com",
+    "password": "password456",
+    "favorites": ["prop-002"]
+  }
+]

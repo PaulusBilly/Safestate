@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Payment Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navigation.css" />
+    <link rel="stylesheet" href="css/payment.css" />
+  </head>
+  <body>
+    <!-- Custom Notification System -->
+    <div id="notification" class="notification hidden">
+      <div class="notification-content">
+        <i class="notification-icon"></i>
+        <span class="notification-message"></span>
+        <button class="notification-close">&times;</button>
+      </div>
+    </div>
+
+    <div class="navigation">
+      <div class="navBar">
+        <div class="nav-left">
+          <a href="marketplace.html">Marketplace</a>
+          <a href="properties.html">Properties</a>
+        </div>
+
+        <div class="nav-logo">
+          <a href="#" class="logo active">SAFESTATE</a>
+        </div>
+
+        <div class="nav-right">
+          <a href="faq.html">FAQ</a>
+          <div class="cta">
+            <a href="account.html">Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="top-section">
+        <div class="image-container">
+          <div class="main-property-image">
+            <img
+              src="img/placeholder.jpg"
+              alt="Property Image"
+              class="property-image"
+            />
+          </div>
+          <div class="property-thumbnails">
+            <img
+              src="img/placeholder.jpg"
+              alt="Thumbnail 1"
+              class="thumbnail"
+            />
+            <img
+              src="img/placeholder.jpg"
+              alt="Thumbnail 2"
+              class="thumbnail"
+            />
+            <img
+              src="img/placeholder.jpg"
+              alt="Thumbnail 3"
+              class="thumbnail"
+            />
+          </div>
+        </div>
+        <div class="info-container">
+          <div class="property-header">
+            <div class="property-info">
+              <h2 class="property-name">Property Name</h2>
+              <p class="property-location">Location</p>
+              <p class="property-price"><strong>Rp 0</strong></p>
+            </div>
+          </div>
+          <div class="payment-options">
+            <h3>Payment Options</h3>
+            <div class="payment-option">
+              <span>Down Payment</span>
+              <input type="radio" name="payment" id="downPaymentRadio" />
+            </div>
+            <div id="downPaymentDetails" class="down-payment-details hidden">
+              <div class="calculation">
+                <p><strong>Calculation</strong></p>
+                <p></p>
+              </div>
+
+              <div class="option-group">
+                <p><strong>Down Payment</strong></p>
+                <label
+                  ><input type="radio" name="dpAmount" value="full" /> Full
+                  Payment - <span class="dp-full"></span
+                ></label>
+                <label
+                  ><input type="radio" name="dpAmount" value="3x" /> 3x
+                  Installments - <span class="dp-3x"></span> each</label
+                >
+                <label
+                  ><input type="radio" name="dpAmount" value="5x" /> 5x
+                  Installments - <span class="dp-5x"></span> each</label
+                >
+              </div>
+
+              <div class="option-group">
+                <p><strong>Payment Method</strong></p>
+                <label
+                  ><input type="radio" name="dpMethod" /> Credit Card</label
+                >
+                <label><input type="radio" name="dpMethod" /> Debit Card</label>
+              </div>
+            </div>
+          </div>
+          <div class="payment-option">
+            <span>Earnest Money</span>
+            <input type="radio" name="payment" id="tandaJadiRadio" />
+          </div>
+          <div id="utjDetails" class="utj-details hidden">
+            <div class="calculation">
+              <p><strong>Calculation</strong></p>
+              <p>
+                Fixed Cost: <strong class="utj-amount">Rp20.000.000</strong>
+              </p>
+              <p class="utj-description">
+                Earnest money to secure the property. This amount will be
+                deducted from the total property price.
+              </p>
+            </div>
+          </div>
+
+          <div class="future-payment">
+            <h3>
+              <strong
+                >How would you like to settle the remaining payment?</strong
+              >
+            </h3>
+            <p class="remaining-payment-info">
+              Remaining payment: <strong class="remaining-amount">Rp0</strong>
+            </p>
+            <div class="option-group">
+              <div class="future-payment-option">
+                <label
+                  ><input type="radio" name="futureMethod" value="cash" /> Cash
+                  Payment</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="futureMethod"
+                    value="installment"
+                  />
+                  Installment Plan</label
+                >
+                <label
+                  ><input type="radio" name="futureMethod" value="loan" /> Bank
+                  Loan</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="payment-summary">
+          <p>Total Payment</p>
+          <strong>Rp0</strong>
+        </div>
+        <button class="continue-button">Proceed Payment</button>
+      </div>
+    </div>
+
+    <div id="paymentOverlay" class="overlay hidden">
+      <div class="receipt-container">
+        <h2>Confirm Payment</h2>
+        <p class="subtitle">Make sure all of the information are correct.</p>
+        <hr class="divider" />
+
+        <p><strong>Details</strong></p>
+        <form class="receipt-form">
+          <label>Date</label>
+          <input type="text" value="22/05/2025" readonly />
+
+          <label>Payment Option</label>
+          <input type="text" value="Down Payment" readonly />
+
+          <label>Payment Method</label>
+          <input type="text" value="Credit Card" readonly />
+
+          <label>Card Number</label>
+          <input type="text" value="**** **** **** 1234" readonly />
+
+          <label>Cardholder Name</label>
+          <input type="text" value="John Doe" readonly />
+
+          <label>Email</label>
+          <input type="text" value="johndoe@example.com" readonly />
+
+          <label>Total Amount</label>
+          <input type="text" value="Rp300.000.000" readonly />
+        </form>
+
+        <div class="overlay-buttons">
+          <button id="cancelButton" class="cancel-button">
+            Cancel Payment
+          </button>
+          <button class="confirm-button">Confirm Payment</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="successOverlay" class="overlay hidden">
+      <div class="success-container">
+        <h2>Payment Successful!</h2>
+        <p>Your payment of <strong>Rp300.000.000</strong> has been received!</p>
+        <p style="opacity: 0.5">Receipt will be sent to registered email.</p>
+        <button id="successCloseButton" class="confirm-button">Close</button>
+      </div>
+    </div>
+  </body>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/payment.js"></script>
+</html>

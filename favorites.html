@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safestate - My Favorites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/searchbar.css">
+    <!-- Add CSS for property cards -->
+    <link rel="stylesheet" href="css/properties.css">
+    <link rel="stylesheet" href="css/marketplace.css">
+    <link rel="stylesheet" href="css/favorites.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Custom Notification System -->
+    <div id="notification" class="notification hidden">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+            <button class="notification-close">&times;</button>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <div class="navBar">
+          <div class="nav-left">
+            <a href="marketplace.html">Marketplace</a>
+            <a href="properties.html">Properties</a>
+          </div>
+        
+          <div class="nav-logo">
+            <a href="index.html" class="logo">SAFESTATE</a>
+          </div>
+        
+          <div class="nav-right">
+            <a href="faq.html">FAQ</a>
+            <div class="cta">
+              <a href="account.html">Account</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="search-wrapper">
+      <div class="icon-wrapper filter-icon">
+        <i class="fa fa-filter toggle-filter"></i>
+      </div>
+      <input type="text" placeholder="Search properties by location, price, or type" />
+      <div class="icon-wrapper search-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <hr style="width:1.2px; height:30px; background-color:rgb(166, 166, 166); border:none; margin:0 0.4rem;">
+      <a href="favorites.html" class="icon-wrapper cart-icon">
+        <i class="fas fa-heart"></i>
+        <span class="cart-badge" id="favoriteCount">0</span>
+      </a>
+      </div>
+      <div class="filter-panel">
+        Filter by
+        
+        <select>
+          <option disabled selected>Price</option>
+          <option value="low">Lowest</option>
+          <option value="high">Highest</option>
+        </select>
+        
+        <select>
+          <option disabled selected>Size</option>
+          <option value="smallest">Smallest</option>
+          <option value="largest">Largest</option>
+        </select>
+        
+        <select>
+          <option disabled selected>Type</option>
+          <option value="apartment">Apartment</option>
+          <option value="house">House</option>
+          <option value="land">Land</option>
+        </select>
+        
+        <select>
+          <option disabled selected>Rent/Buy</option>
+          <option value="rent">Rent</option>
+          <option value="buy">Buy</option>
+        </select>
+        
+        <hr style="width:1.2px; height:30px; background-color:rgb(166, 166, 166); border:none; margin:0 0.4rem;">
+        
+        <button class="apply-filter">Apply</button>
+      </div>
+      
+      <!-- Add container for favorite properties -->
+      <div class="container">
+        <h1>My Favorite Properties</h1>
+        <div id="favorites-container" class="properties-grid"></div>
+      </div>
+
+<!-- Property Detail Overlay -->
+<div class="overlay" id="propertyOverlay">
+  <div class="overlay-content">
+    <button class="close-overlay" onclick="closeOverlay()"><i class="fas fa-times"></i></button>
+    <div class="overlay-body">
+      <div class="overlay-left">
+        <img src="https://via.placeholder.com/400x300" alt="Property Image" class="main-image" />
+        <div class="image-thumbnails">
+          <img src="https://via.placeholder.com/100" alt="Thumbnail" />
+          <img src="https://via.placeholder.com/100" alt="Thumbnail" />
+          <img src="https://via.placeholder.com/100" alt="Thumbnail" />
+        </div>
+      </div>
+      <div class="overlay-right">
+        <small class="label">Label</small>
+        <h2 class="property-title">Property Name</h2>
+        <p class="published-date">Published on</p>
+        <p class="location">Location</p>
+        <p class="description">Short description</p>
+        <p class="price"><strong>Rp 2.500.000.000</strong></p>
+        <div class="agent-contact">
+          <div class="agent-info">
+            <img src="agent-photo.jpg" alt="Agent" class="agent-photo" />
+            <div class="agent-details">
+              <strong>Paulus Billiardo Putrakedua</strong>
+              <small>Billiardo Enterprise</small>
+            </div>
+          </div>
+          <a href="https://wa.me/6281807216060" target="_blank" class="whatsapp-btn">
+            Direct to WhatsApp
+          </a>
+        </div>
+        <div class="secondary-cta">
+          <button class="cta-btn add-to-favorites">
+            <i class="fas fa-heart"></i>Add to Favorites
+          </button>
+          <button class="cta-btn buy-now">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="property-details-tables">
+      <h3>Specification</h3>
+      <table>
+        <tr><th>Luas Tanah</th><td>120 m²</td><th>Sertifikat</th><td>SHM</td></tr>
+        <tr><th>Luas Bangunan</th><td>90 m²</td><th>Daya Listrik</th><td>2200 Watt</td></tr>
+        <tr><th>Tipe Properti</th><td>Rumah</td><th>Jumlah Lantai</th><td>2</td></tr>
+        <tr><th>Bedrooms</th><td>3</td><th>Bathrooms</th><td>2</td></tr>
+      </table>
+
+      <h3>Facility</h3>
+      <table>
+        <tr><th>Swimming Pool</th><td>Yes</td><th>Gym</th><td>No</td></tr>
+        <tr><th>Security 24/7</th><td>Yes</td><th>Playground</th><td>Yes</td></tr>
+        <tr><th>Parking Space</th><td>Yes</td><th>Internet</th><td>Yes</td></tr>
+      </table>
+
+      <h3>Nearby Attraction</h3>
+      <table>
+        <tr><th>Shopping Mall</th><td>5 mins drive</td><th>City Park</th><td>10 mins walk</td></tr>
+        <tr><th>Hospital</th><td>8 mins drive</td><th>School</th><td>4 mins walk</td></tr>
+        <tr><th>Train Station</th><td>15 mins drive</td><th>Supermarket</th><td>2 mins walk</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Script tags in the correct order -->
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/navbar.js"></script>
+<script src="js/searchbar.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/property-display.js"></script>
+<script>
+  // Initialize components
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Update favorites count
+    await updateFavoritesCount();
+    
+    // Fix cart links to point to favorites.html (all instances)
+    const cartLinks = document.querySelectorAll('.cart-icon');
+    cartLinks.forEach(cartLink => {
+      if (cartLink) {
+        cartLink.href = 'favorites.html';
+      }
+    });
+    
+    // Create container for favorite properties if it doesn't exist
+    let favoritesContainer = document.getElementById('favorites-container');
+    if (!favoritesContainer) {
+      favoritesContainer = document.createElement('div');
+      favoritesContainer.id = 'favorites-container';
+      favoritesContainer.className = 'properties-grid';
+      document.body.appendChild(favoritesContainer);
+    }
+    
+    // Get favorite properties
+    const favoriteProperties = await getFavoriteProperties();
+    
+    // Display favorite properties
+    if (favoriteProperties.length === 0) {
+      favoritesContainer.innerHTML = '<p class="no-results">You have no favorite properties. Browse our <a href="marketplace.html">marketplace</a> to find properties you like.</p>';
+    } else {
+      favoriteProperties.forEach(property => {
+        const propertyCard = createPropertyCard(property);
+        favoritesContainer.appendChild(propertyCard);
+      });
+    }
+  });
+</script>
+</body>
+</html>

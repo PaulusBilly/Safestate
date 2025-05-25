@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "prop-001",
+    "name": "Luxury Apartment Downtown",
+    "location": "Central Jakarta",
+    "price": 1400000000,
+    "pricePerMonth": 5000000,
+    "status": "OWNED",
+    "type": "house",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "size": {
+      "land": 120,
+      "building": 90
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "Located in the heart of Central Jakarta, this upscale residence offers modern living with spacious interiors and premium security. Ideal for families, it features multiple bedrooms, a playground, and is just steps away from top schools and shopping. Enjoy city convenience with a touch of luxury.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "5 mins drive",
+      "park": "10 mins walk",
+      "hospital": "8 mins drive",
+      "school": "4 mins walk",
+      "trainStation": "15 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": "2023-12-31",
+    "publishedDate": "2023-01-15"
+  },
+  {
+    "id": "prop-002",
+    "name": "Green Valley Family House",
+    "location": "South Jakarta",
+    "price": 2700000000,
+    "pricePerMonth": 12000000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "size": {
+      "land": 200,
+      "building": 160
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "Nestled in South Jakarta, this spacious family home boasts a generous layout perfect for larger families. With a secure environment, playground, and proximity to parks and schools, it offers both comfort and convenience. The tranquil neighborhood and easy access to amenities make it an excellent choice for modern living.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "3500 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "10 mins drive",
+      "park": "5 mins walk",
+      "hospital": "7 mins drive",
+      "school": "8 mins walk",
+      "trainStation": "20 mins drive",
+      "supermarket": "3 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2024-03-08"
+  },
+  {
+    "id": "prop-003",
+    "name": "Cozy Urban Studio",
+    "location": "West Jakarta",
+    "price": 680000000,
+    "pricePerMonth": 3500000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 40,
+      "building": 35
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Situated in vibrant West Jakarta, this cozy urban studio is a compact and affordable option, ideal for couples or first-time buyers. The property features modern finishes, reliable security, and is within walking distance to parks and supermarkets. Its efficient layout and prime location offer convenience and comfort.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "8 mins drive",
+      "park": "2 mins walk",
+      "hospital": "6 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "13 mins drive",
+      "supermarket": "1 min walk"
+    },
+    "contractEndDate": "2025-02-01",
+    "publishedDate": "2024-05-14"
+  },
+  {
+    "id": "prop-004",
+    "name": "Premium Office Lot",
+    "location": "Central Jakarta",
+    "price": 5000000000,
+    "pricePerMonth": 25000000,
+    "status": "OWNED",
+    "type": "house",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "size": {
+      "land": 400,
+      "building": 350
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "This premium property in Central Jakarta is a luxurious office lot offering expansive space and high-end facilities. Featuring a swimming pool, gym, and top-tier security, it's perfect for businesses seeking prestige and comfort. The location is highly accessible, close to key city attractions and shopping centers.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "7700 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "2 mins drive",
+      "park": "6 mins walk",
+      "hospital": "5 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "5 mins drive",
+      "supermarket": "2 mins drive"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-09-19"
+  },
+  {
+    "id": "prop-005",
+    "name": "Mountainview Villa",
+    "location": "Bogor",
+    "price": 3400000000,
+    "pricePerMonth": 16000000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "size": {
+      "land": 350,
+      "building": 220
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "Set in scenic Bogor, this spacious villa offers stunning mountain views and a private swimming pool. Designed for luxury living, it features ample bedrooms, a large backyard, and is well-suited for families who value tranquility and premium amenities. Enjoy a serene environment close to nature and essential facilities.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "4400 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": false,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "12 mins drive",
+      "park": "5 mins walk",
+      "hospital": "10 mins drive",
+      "school": "20 mins walk",
+      "trainStation": "18 mins drive",
+      "supermarket": "7 mins drive"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-06-25"
+  },
+  {
+    "id": "prop-006",
+    "name": "Minimalist Downtown Loft",
+    "location": "Central Jakarta",
+    "price": 950000000,
+    "pricePerMonth": 6000000,
+    "status": "BOUGHT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 65,
+      "building": 58
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Located in Central Jakarta, this minimalist loft is perfect for young couples or professionals seeking a modern urban lifestyle. The compact layout is enhanced by contemporary design and is close to shopping malls, parks, and public transport. Enjoy secure living with easy access to city attractions.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "6 mins drive",
+      "park": "8 mins walk",
+      "hospital": "7 mins drive",
+      "school": "12 mins walk",
+      "trainStation": "14 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2024-01-07"
+  },
+  {
+    "id": "prop-007",
+    "name": "Grand East Residence",
+    "location": "East Jakarta",
+    "price": 2200000000,
+    "pricePerMonth": 9500000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size": {
+      "land": 180,
+      "building": 150
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "Grand East Residence in East Jakarta offers spacious living with three bedrooms and a suite of amenities including a gym and playground. The home is ideal for growing families, set in a secure neighborhood within walking distance to parks and schools. Its modern interiors and convenient location make it a top choice.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "3500 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "14 mins drive",
+      "park": "3 mins walk",
+      "hospital": "6 mins drive",
+      "school": "5 mins walk",
+      "trainStation": "12 mins drive",
+      "supermarket": "4 mins walk"
+    },
+    "contractEndDate": "2025-06-15",
+    "publishedDate": "2024-02-10"
+  },
+  {
+    "id": "prop-008",
+    "name": "Elegant Riverside Land",
+    "location": "Depok",
+    "price": 1200000000,
+    "pricePerMonth": 0,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "size": {
+      "land": 300,
+      "building": 180
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "This elegant riverside property in Depok features a generous land area and a tranquil setting near a park. With three bedrooms, a playground, and robust security, it's perfect for families seeking peace and space. The surrounding green environment and proximity to amenities enhance everyday living.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "16 mins drive",
+      "park": "1 min walk",
+      "hospital": "15 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "20 mins drive",
+      "supermarket": "10 mins drive"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2024-04-20"
+  },
+  {
+    "id": "prop-009",
+    "name": "Sunter Lake Apartment",
+    "location": "North Jakarta",
+    "price": 800000000,
+    "pricePerMonth": 4000000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 55,
+      "building": 50
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Overlooking Sunter Lake in North Jakarta, this affordable apartment is perfect for couples or small families. The property offers modern comforts, a playground, and is close to parks, supermarkets, and schools. Enjoy secure living in a vibrant neighborhood with easy city access.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "7 mins drive",
+      "park": "3 mins walk",
+      "hospital": "5 mins drive",
+      "school": "4 mins walk",
+      "trainStation": "17 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": "2024-12-01",
+    "publishedDate": "2023-11-28"
+  },
+  {
+    "id": "prop-010",
+    "name": "Modern Compact House",
+    "location": "Bekasi",
+    "price": 950000000,
+    "pricePerMonth": 3800000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "size": {
+      "land": 80,
+      "building": 70
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "Located in Bekasi, this modern compact house is ideal for first-time buyers, couples, or small families. The home features contemporary finishes, a playground, and is within walking distance to schools and parks. Its affordable price and efficient layout make it a smart urban choice.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": false,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "11 mins drive",
+      "park": "9 mins walk",
+      "hospital": "10 mins drive",
+      "school": "6 mins walk",
+      "trainStation": "19 mins drive",
+      "supermarket": "4 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-08-17"
+  },
+  {
+    "id": "prop-011",
+    "name": "Tangerang Luxury Mansion",
+    "location": "Tangerang",
+    "price": 7800000000,
+    "pricePerMonth": 32000000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 6,
+    "bathrooms": 6,
+    "size": {
+      "land": 600,
+      "building": 400
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "This luxury mansion in Tangerang is designed for those seeking grandeur and comfort. With six bedrooms, a swimming pool, gym, and premium security, it is perfect for large families or those who love to entertain. The prestigious neighborhood offers easy access to top amenities and green spaces.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "7700 Watt",
+      "floors": 3
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "5 mins drive",
+      "park": "6 mins walk",
+      "hospital": "8 mins drive",
+      "school": "7 mins walk",
+      "trainStation": "12 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2024-05-10"
+  },
+  {
+    "id": "prop-012",
+    "name": "Serpong Urban Apartment",
+    "location": "Serpong",
+    "price": 650000000,
+    "pricePerMonth": 3100000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 30,
+      "building": 28
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Serpong Urban Apartment is a compact and affordable residence, ideal for singles, couples, or first-time renters. The home offers modern interiors, reliable security, and is just steps from public transport, schools, and supermarkets. Enjoy urban convenience in a lively neighborhood.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "3 mins drive",
+      "park": "7 mins walk",
+      "hospital": "6 mins drive",
+      "school": "2 mins walk",
+      "trainStation": "8 mins drive",
+      "supermarket": "1 min walk"
+    },
+    "contractEndDate": "2024-11-01",
+    "publishedDate": "2023-12-15"
+  },
+  {
+    "id": "prop-013",
+    "name": "BSD City Family Home",
+    "location": "BSD City",
+    "price": 1850000000,
+    "pricePerMonth": 8200000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 3,
+    "bathrooms": 3,
+    "size": {
+      "land": 150,
+      "building": 120
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "BSD City Family Home offers a comfortable and modern living space with three bedrooms and multiple amenities. The secure environment, gym, and playground make it perfect for families. Located near parks and schools, it ensures a balanced lifestyle in a thriving community.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "3500 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "9 mins drive",
+      "park": "4 mins walk",
+      "hospital": "7 mins drive",
+      "school": "8 mins walk",
+      "trainStation": "18 mins drive",
+      "supermarket": "3 mins walk"
+    },
+    "contractEndDate": "2025-08-20",
+    "publishedDate": "2024-03-29"
+  },
+  {
+    "id": "prop-014",
+    "name": "South City Land",
+    "location": "South Jakarta",
+    "price": 4300000000,
+    "pricePerMonth": 0,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "size": {
+      "land": 520,
+      "building": 350
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "Located in South Jakarta, this expansive land property is perfect for those seeking space and privacy. The house features five bedrooms, a swimming pool, and a lush garden, making it ideal for large families or those who love outdoor living. Enjoy a peaceful environment close to city conveniences.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "6600 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "8 mins drive",
+      "park": "6 mins walk",
+      "hospital": "10 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "18 mins drive",
+      "supermarket": "5 mins drive"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-10-13"
+  },
+  {
+    "id": "prop-015",
+    "name": "Kemang Townhouse",
+    "location": "Kemang",
+    "price": 3600000000,
+    "pricePerMonth": 15500000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "size": {
+      "land": 210,
+      "building": 170
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Kemang Townhouse is a luxurious residence offering four bedrooms, a private swimming pool, gym, and playground. Ideal for families, it combines modern living with premium amenities in a prestigious neighborhood. Enjoy proximity to parks, shopping, and excellent schools.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "4400 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "6 mins drive",
+      "park": "2 mins walk",
+      "hospital": "9 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "14 mins drive",
+      "supermarket": "3 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2024-01-22"
+  },
+  {
+    "id": "prop-016",
+    "name": "Studio Mediterania Garden",
+    "location": "Central Jakarta",
+    "price": 780000000,
+    "pricePerMonth": 4100000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 36,
+      "building": 30
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "Studio Mediterania Garden in Central Jakarta is a compact and affordable option for singles or couples. Featuring modern interiors, secure parking, and close proximity to shopping and parks, it offers a convenient urban lifestyle. Perfect for those seeking efficiency and accessibility.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "5 mins drive",
+      "park": "7 mins walk",
+      "hospital": "7 mins drive",
+      "school": "9 mins walk",
+      "trainStation": "12 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": "2025-01-05",
+    "publishedDate": "2023-12-05"
+  },
+  {
+    "id": "prop-017",
+    "name": "Kebayoran Lama Family House",
+    "location": "Kebayoran Lama",
+    "price": 2100000000,
+    "pricePerMonth": 8900000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "size": {
+      "land": 145,
+      "building": 110
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "Located in Kebayoran Lama, this inviting family house offers a well-designed layout with three bedrooms and a playground. The secure neighborhood and proximity to parks and schools make it ideal for families. Enjoy spacious living and easy access to essential amenities.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "9 mins drive",
+      "park": "4 mins walk",
+      "hospital": "8 mins drive",
+      "school": "7 mins walk",
+      "trainStation": "15 mins drive",
+      "supermarket": "3 mins walk"
+    },
+    "contractEndDate": "2025-09-09",
+    "publishedDate": "2024-05-13"
+  },
+  {
+    "id": "prop-018",
+    "name": "BSD City Compact Apartment",
+    "location": "BSD City",
+    "price": 700000000,
+    "pricePerMonth": 3700000,
+    "status": "FOR_RENT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 32,
+      "building": 28
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "BSD City Compact Apartment is a budget-friendly home well-suited to singles, couples, or first-time buyers. The efficient layout, secure environment, and proximity to schools and parks provide a comfortable and convenient lifestyle. Enjoy easy access to shopping and public transport.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "6 mins drive",
+      "park": "9 mins walk",
+      "hospital": "8 mins drive",
+      "school": "3 mins walk",
+      "trainStation": "12 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": "2024-10-11",
+    "publishedDate": "2023-12-27"
+  },
+  {
+    "id": "prop-019",
+    "name": "Exclusive Golf View Villa",
+    "location": "Pondok Indah",
+    "price": 12000000000,
+    "pricePerMonth": 47000000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 5,
+    "bathrooms": 5,
+    "size": {
+      "land": 700,
+      "building": 500
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "Set in prestigious Pondok Indah, this exclusive villa offers breathtaking golf course views and luxury amenities. With five bedrooms, a private pool, and premium security, it's ideal for families who value space and sophistication. The serene environment is complemented by proximity to shopping and parks.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "11000 Watt",
+      "floors": 3
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "5 mins drive",
+      "park": "2 mins walk",
+      "hospital": "6 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "15 mins drive",
+      "supermarket": "3 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2024-03-16"
+  },
+  {
+    "id": "prop-020",
+    "name": "Urban Compact Loft",
+    "location": "Jakarta Barat",
+    "price": 820000000,
+    "pricePerMonth": 3900000,
+    "status": "BOUGHT",
+    "type": "house",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "size": {
+      "land": 36,
+      "building": 30
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "Urban Compact Loft in Jakarta Barat is a modern, affordable choice for couples or first-time buyers. The efficient design is complemented by secure parking and easy access to parks, schools, and shopping. Its central location and cozy layout provide comfort and convenience.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "2200 Watt",
+      "floors": 1
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": false,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "4 mins drive",
+      "park": "8 mins walk",
+      "hospital": "6 mins drive",
+      "school": "9 mins walk",
+      "trainStation": "13 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-11-21"
+  },
+  {
+    "id": "prop-021",
+    "name": "Sudirman Office Tower Lot",
+    "location": "Central Jakarta",
+    "price": 6400000000,
+    "pricePerMonth": 34000000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "size": {
+      "land": 450,
+      "building": 300
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Sudirman Office Tower Lot in Central Jakarta provides a luxury office environment with expansive space and state-of-the-art facilities. Featuring a swimming pool, gym, and premium security, it is perfect for businesses seeking prestige and convenience. The location ensures quick access to major city attractions.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "7700 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "3 mins drive",
+      "park": "5 mins walk",
+      "hospital": "8 mins drive",
+      "school": "10 mins walk",
+      "trainStation": "7 mins drive",
+      "supermarket": "2 mins drive"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-08-19"
+  },
+  {
+    "id": "prop-022",
+    "name": "Kemayoran Skyline Residence",
+    "location": "Kemayoran",
+    "price": 1300000000,
+    "pricePerMonth": 7500000,
+    "status": "FOR_RENT",
+    "type": "apartment",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "size": {
+      "land": 70,
+      "building": 60
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop2.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop1.jpg",
+    "description": "Kemayoran Skyline Residence is a stylish apartment offering modern amenities and panoramic views. With a swimming pool, gym, and playground, it's ideal for couples or small families. Enjoy a secure environment within walking distance to parks, shopping, and public transport.",
+    "specifications": {
+      "certificate": "HGB",
+      "electricity": "2200 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "4 mins drive",
+      "park": "3 mins walk",
+      "hospital": "6 mins drive",
+      "school": "8 mins walk",
+      "trainStation": "10 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": "2025-04-30",
+    "publishedDate": "2024-02-11"
+  },
+  {
+    "id": "prop-023",
+    "name": "Menteng Heritage House",
+    "location": "Menteng",
+    "price": 5300000000,
+    "pricePerMonth": 19000000,
+    "status": "FOR_SALE",
+    "type": "house",
+    "bedrooms": 5,
+    "bathrooms": 5,
+    "size": {
+      "land": 320,
+      "building": 270
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop3.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop2.jpg",
+    "description": "Situated in the prestigious Menteng area, this heritage house blends classic charm with modern luxury. Featuring five bedrooms, a swimming pool, and secure parking, it's perfect for families who value space and elegance. Enjoy a tranquil setting close to parks and city amenities.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "6600 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": true,
+      "gym": true,
+      "security": true,
+      "playground": false,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "6 mins drive",
+      "park": "2 mins walk",
+      "hospital": "8 mins drive",
+      "school": "11 mins walk",
+      "trainStation": "17 mins drive",
+      "supermarket": "4 mins walk"
+    },
+    "contractEndDate": null,
+    "publishedDate": "2023-09-08"
+  },
+  {
+    "id": "prop-024",
+    "name": "Puri Indah Urban Home",
+    "location": "Puri Indah",
+    "price": 2900000000,
+    "pricePerMonth": 12000000,
+    "status": "RENTED",
+    "type": "house",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "size": {
+      "land": 210,
+      "building": 160
+    },
+    "agentImage": "img/agent.png",
+    "thumbnails": ["img/prop1.jpg", "img/prop2.jpg", "img/prop4.jpg"],
+    "mainImage": "img/prop3.jpg",
+    "description": "Puri Indah Urban Home offers spacious living with four bedrooms and a suite of amenities including a gym and playground. Perfect for families, it is located in a secure neighborhood close to parks, schools, and shopping. The modern layout and convenient location ensure a comfortable lifestyle.",
+    "specifications": {
+      "certificate": "SHM",
+      "electricity": "3500 Watt",
+      "floors": 2
+    },
+    "facilities": {
+      "swimmingPool": false,
+      "gym": true,
+      "security": true,
+      "playground": true,
+      "parking": true,
+      "internet": true
+    },
+    "nearbyAttractions": {
+      "shoppingMall": "8 mins drive",
+      "park": "5 mins walk",
+      "hospital": "9 mins drive",
+      "school": "7 mins walk",
+      "trainStation": "15 mins drive",
+      "supermarket": "2 mins walk"
+    },
+    "contractEndDate": "2024-12-30",
+    "publishedDate": "2023-10-02"
+  }
+]

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Megrim&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+  }
+  
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: #f0f0f3;
+    min-height: 100vh;
+  }
+  
+.navigation {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-top: 30px;
+    height: 70px;
+    align-items: center;
+  }
+  
+  .navBar {
+    width: 86%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6em 2em;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 70px;
+  }
+  
+  .navBar.sticky-full {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    padding: 0 1.5rem;
+    margin-top: 0;
+    transition: width 0.3s ease, padding 0.3s ease, border-radius 0.3s ease;
+  }
+  
+  .navBar a {
+    font-size: 14px;
+    font-weight: 300;
+    transition: 0.3s ease;
+  }
+  
+  .navBar .active {
+    font-weight: 800;
+  }
+  
+  .navBar a:hover {
+    font-weight: bold;
+  }
+  
+  .nav-left,
+  .nav-right {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .nav-logo a {
+    font-family: 'Megrim';
+    font-size: 1.4rem;
+    font-weight: 800;
+  }
+  
+  .nav-logo a:hover {
+    font-weight: 800;
+  }
+  
+  .cta a {
+    background-color: white;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .cta a:hover {
+    background-color: #007bff;
+    color: white;
+    font-weight: 500;
+  }
+  

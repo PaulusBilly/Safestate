@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safestate - FAQ</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/navigation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .faq-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+        background: #f8f9fa;
+        color: #2d3748;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .faq-header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .faq-search {
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .faq-search input {
+        width: 100%;
+        padding: 1rem 1rem 1rem 3rem;
+        border: 2px solid #e9ecef;
+        border-radius: 50px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .faq-search input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+      }
+
+      .faq-search i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 1.1rem;
+      }
+
+      .faq-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .category-btn {
+        padding: 0.8rem 1.5rem;
+        border: 2px solid #e9ecef;
+        background: white;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        text-align: center;
+        color: #495057;
+      }
+
+      .category-btn:hover,
+      .category-btn.active {
+        background: white;
+        color: #667eea;
+        border-color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+
+      .faq-section {
+        margin-bottom: 2rem;
+      }
+
+      .faq-section h2 {
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        position: relative;
+        padding-left: 1rem;
+      }
+
+      .faq-section h2::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 60%;
+        background: #667eea;
+        border-radius: 2px;
+      }
+
+      .faq-item {
+        margin-bottom: 1rem;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .faq-item:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-question {
+        background: white;
+        border: none;
+        padding: 1.5rem;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2d3748;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .faq-question:hover {
+        background: #f8f9fa;
+      }
+
+      .faq-question.active {
+        background: #667eea;
+        color: white;
+      }
+
+      .faq-toggle {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .faq-question.active .faq-toggle {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        background: #f8f9fa;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .faq-answer.active {
+        max-height: 300px;
+        padding: 1.5rem;
+      }
+
+      .faq-answer p {
+        margin: 0;
+        line-height: 1.7;
+        color: #4a5568;
+      }
+
+      .faq-answer ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+      }
+
+      .faq-answer li {
+        margin-bottom: 0.5rem;
+        color: #4a5568;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 768px) {
+        .faq-header h1 {
+          font-size: 2rem;
+        }
+
+        .faq-header p {
+          font-size: 1rem;
+        }
+
+        .faq-categories {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .category-btn {
+          padding: 0.6rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navigation">
+      <div class="navBar">
+        <div class="nav-left">
+          <a href="marketplace.html">Marketplace</a>
+          <a href="properties.html">Properties</a>
+        </div>
+
+        <div class="nav-logo">
+          <a href="index.html" class="logo">SAFESTATE</a>
+        </div>
+
+        <div class="nav-right">
+          <a href="#" class="active">FAQ</a>
+          <div class="cta">
+            <a href="account.html">Account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-header">
+        <h1>Frequently Asked Questions</h1>
+        <p>
+          Find answers to common questions about buying, renting, and managing
+          properties on Safestate. Can't find what you're looking for? Contact
+          our support team.
+        </p>
+      </div>
+
+      <div class="faq-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="faqSearch" placeholder="Search for answers..." />
+      </div>
+
+      <div class="faq-categories">
+        <button class="category-btn active" data-category="all">
+          All Questions
+        </button>
+        <button class="category-btn" data-category="buying">Buying</button>
+        <button class="category-btn" data-category="renting">Renting</button>
+        <button class="category-btn" data-category="payment">Payment</button>
+        <button class="category-btn" data-category="account">Account</button>
+      </div>
+
+      <div class="faq-section" data-category="buying">
+        <h2>Buying Properties</h2>
+
+        <div class="faq-item" data-category="buying">
+          <button class="faq-question">
+            How do I buy a property on Safestate?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Buying a property on Safestate is simple:</p>
+            <ul>
+              <li>Browse properties in our marketplace</li>
+              <li>Click on a property to view details</li>
+              <li>Click "Buy Now" to proceed to payment</li>
+              <li>Choose your payment option (down payment or full payment)</li>
+              <li>Complete the payment process</li>
+              <li>The property will be added to your properties page</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="buying">
+          <button class="faq-question">
+            What payment options are available?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>We offer flexible payment options:</p>
+            <ul>
+              <li>
+                <strong>Down Payment:</strong> Pay 20% upfront with installment
+                options (3x or 5x)
+              </li>
+              <li>
+                <strong>Tanda Jadi (Earnest Money):</strong> Secure the property
+                with Rp 20,000,000
+              </li>
+              <li>
+                <strong>Full Payment:</strong> Pay the complete amount at once
+              </li>
+            </ul>
+            <p>
+              All payments can be made via credit card, bank transfer, or cash.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="buying">
+          <button class="faq-question">
+            Can I cancel a purchase after payment?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Purchase cancellations are subject to our terms and conditions.
+              Generally:
+            </p>
+            <ul>
+              <li>
+                Earnest money payments can be cancelled within 7 days with a 10%
+                penalty
+              </li>
+              <li>
+                Down payments are refundable within 3 days minus processing fees
+              </li>
+              <li>
+                Full payments require property inspection and legal review for
+                cancellation
+              </li>
+            </ul>
+            <p>
+              Please contact our support team for specific cancellation
+              requests.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-section" data-category="renting">
+        <h2>Renting Properties</h2>
+
+        <div class="faq-item" data-category="renting">
+          <button class="faq-question">
+            How do I rent a property?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Renting a property is straightforward:</p>
+            <ul>
+              <li>Filter properties by "Rent" in the marketplace</li>
+              <li>Select a property that suits your needs</li>
+              <li>Contact the agent via WhatsApp for viewing</li>
+              <li>Submit rental application with required documents</li>
+              <li>Pay security deposit and first month's rent</li>
+              <li>Sign the rental agreement</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="renting">
+          <button class="faq-question">
+            What documents do I need for renting?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Required documents for rental applications:</p>
+            <ul>
+              <li>Valid ID card (KTP) or passport</li>
+              <li>Proof of income (salary slip or bank statements)</li>
+              <li>Employment verification letter</li>
+              <li>References from previous landlords (if applicable)</li>
+              <li>Emergency contact information</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="renting">
+          <button class="faq-question">
+            How much is the security deposit?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Security deposits typically range from 1-3 months' rent, depending
+              on:
+            </p>
+            <ul>
+              <li>Property type and value</li>
+              <li>Rental duration</li>
+              <li>Your credit history</li>
+              <li>Property owner's requirements</li>
+            </ul>
+            <p>
+              The security deposit is refundable at the end of your lease,
+              subject to property condition assessment.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-section" data-category="payment">
+        <h2>Payment & Transactions</h2>
+
+        <div class="faq-item" data-category="payment">
+          <button class="faq-question">
+            Is my payment information secure?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, we prioritize your financial security:</p>
+            <ul>
+              <li>SSL encryption for all transactions</li>
+              <li>PCI DSS compliant payment processing</li>
+              <li>No storage of credit card information on our servers</li>
+              <li>Two-factor authentication for account access</li>
+              <li>Regular security audits and monitoring</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="payment">
+          <button class="faq-question">
+            How long does payment processing take?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Payment processing times vary by method:</p>
+            <ul>
+              <li><strong>Credit Card:</strong> Instant confirmation</li>
+              <li><strong>Bank Transfer:</strong> 1-2 business days</li>
+              <li><strong>Cash Payment:</strong> Immediate at our offices</li>
+              <li><strong>Installments:</strong> Auto-deducted monthly</li>
+            </ul>
+            <p>You'll receive email confirmation once payment is processed.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="payment">
+          <button class="faq-question">
+            Can I get a receipt for my payment?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, you'll receive digital receipts for all transactions:</p>
+            <ul>
+              <li>Immediate email confirmation after payment</li>
+              <li>Detailed invoice with transaction ID</li>
+              <li>Download option from your account dashboard</li>
+              <li>Tax documentation available for property purchases</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-section" data-category="account">
+        <h2>Account Management</h2>
+
+        <div class="faq-item" data-category="account">
+          <button class="faq-question">
+            How do I create an account?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Creating an account is quick and easy:</p>
+            <ul>
+              <li>Click "Account" in the navigation menu</li>
+              <li>Select "Sign Up" or "Register"</li>
+              <li>Fill in your basic information</li>
+              <li>Verify your email address</li>
+              <li>Complete your profile for better property recommendations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="account">
+          <button class="faq-question">
+            Can I manage multiple properties?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, your account can handle multiple properties:</p>
+            <ul>
+              <li>View all owned properties in one dashboard</li>
+              <li>Track rental properties separately</li>
+              <li>Manage payment schedules for each property</li>
+              <li>Access property documents and contracts</li>
+              <li>Monitor property values and market trends</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="account">
+          <button class="faq-question">
+            How do I update my account information?
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Update your account anytime:</p>
+            <ul>
+              <li>Go to Account > Profile Settings</li>
+              <li>Edit personal information, contact details</li>
+              <li>Update payment methods and preferences</li>
+              <li>Change password and security settings</li>
+              <li>Manage notification preferences</li>
+            </ul>
+            <p>Some changes may require email verification for security.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // FAQ functionality
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        const categoryBtns = document.querySelectorAll(".category-btn");
+        const searchInput = document.getElementById("faqSearch");
+        const faqItems = document.querySelectorAll(".faq-item");
+        const faqSections = document.querySelectorAll(".faq-section");
+
+        // Toggle FAQ answers
+        faqQuestions.forEach((question) => {
+          question.addEventListener("click", () => {
+            const answer = question.nextElementSibling;
+            const isActive = question.classList.contains("active");
+
+            // Close all other FAQs
+            faqQuestions.forEach((q) => {
+              q.classList.remove("active");
+              q.nextElementSibling.classList.remove("active");
+            });
+
+            // Toggle current FAQ
+            if (!isActive) {
+              question.classList.add("active");
+              answer.classList.add("active");
+            }
+          });
+        });
+
+        // Category filtering
+        categoryBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const category = btn.dataset.category;
+
+            // Update active button
+            categoryBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            // Show/hide sections and items
+            if (category === "all") {
+              faqSections.forEach(
+                (section) => (section.style.display = "block")
+              );
+              faqItems.forEach((item) => (item.style.display = "block"));
+            } else {
+              faqSections.forEach((section) => {
+                if (section.dataset.category === category) {
+                  section.style.display = "block";
+                } else {
+                  section.style.display = "none";
+                }
+              });
+
+              faqItems.forEach((item) => {
+                if (item.dataset.category === category) {
+                  item.style.display = "block";
+                } else {
+                  item.style.display = "none";
+                }
+              });
+            }
+
+            // Clear search
+            searchInput.value = "";
+          });
+        });
+
+        // Search functionality
+        searchInput.addEventListener("input", (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+
+          faqItems.forEach((item) => {
+            const question = item
+              .querySelector(".faq-question")
+              .textContent.toLowerCase();
+            const answer = item
+              .querySelector(".faq-answer")
+              .textContent.toLowerCase();
+
+            if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+              item.style.display = "block";
+              item.closest(".faq-section").style.display = "block";
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          // Hide empty sections
+          if (searchTerm) {
+            faqSections.forEach((section) => {
+              const visibleItems = section.querySelectorAll(
+                '.faq-item[style*="block"]'
+              );
+              if (visibleItems.length === 0) {
+                section.style.display = "none";
+              }
+            });
+
+            // Reset category filter
+            categoryBtns.forEach((b) => b.classList.remove("active"));
+            categoryBtns[0].classList.add("active"); // "All" button
+          }
+        });
+
+        // Smooth animations for better UX
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        });
+
+        faqItems.forEach((item) => {
+          item.style.opacity = "0";
+          item.style.transform = "translateY(20px)";
+          item.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(item);
+        });
+      });
+    </script>
+  </body>
+</html>

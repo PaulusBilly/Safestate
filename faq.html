@@ -525,26 +525,22 @@
     <script src="js/navbar.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // FAQ functionality
         const faqQuestions = document.querySelectorAll(".faq-question");
         const categoryBtns = document.querySelectorAll(".category-btn");
         const searchInput = document.getElementById("faqSearch");
         const faqItems = document.querySelectorAll(".faq-item");
         const faqSections = document.querySelectorAll(".faq-section");
 
-        // Toggle FAQ answers
         faqQuestions.forEach((question) => {
           question.addEventListener("click", () => {
             const answer = question.nextElementSibling;
             const isActive = question.classList.contains("active");
 
-            // Close all other FAQs
             faqQuestions.forEach((q) => {
               q.classList.remove("active");
               q.nextElementSibling.classList.remove("active");
             });
 
-            // Toggle current FAQ
             if (!isActive) {
               question.classList.add("active");
               answer.classList.add("active");
@@ -552,16 +548,13 @@
           });
         });
 
-        // Category filtering
         categoryBtns.forEach((btn) => {
           btn.addEventListener("click", () => {
             const category = btn.dataset.category;
 
-            // Update active button
             categoryBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
 
-            // Show/hide sections and items
             if (category === "all") {
               faqSections.forEach(
                 (section) => (section.style.display = "block")
@@ -585,12 +578,10 @@
               });
             }
 
-            // Clear search
             searchInput.value = "";
           });
         });
 
-        // Search functionality
         searchInput.addEventListener("input", (e) => {
           const searchTerm = e.target.value.toLowerCase();
 
@@ -610,7 +601,6 @@
             }
           });
 
-          // Hide empty sections
           if (searchTerm) {
             faqSections.forEach((section) => {
               const visibleItems = section.querySelectorAll(
@@ -621,13 +611,11 @@
               }
             });
 
-            // Reset category filter
             categoryBtns.forEach((b) => b.classList.remove("active"));
-            categoryBtns[0].classList.add("active"); // "All" button
+            categoryBtns[0].classList.add("active");
           }
         });
 
-        // Smooth animations for better UX
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {

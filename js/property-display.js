@@ -1,21 +1,15 @@
-// Property display functions
-
-// Custom notification system
 function showNotification(message, type = "info") {
   const notification = document.getElementById("notification");
   const messageElement = notification.querySelector(".notification-message");
 
-  // Set message and type
   messageElement.textContent = message;
   notification.className = `notification ${type}`;
 
-  // Show notification
   notification.classList.remove("hidden");
   setTimeout(() => {
     notification.classList.add("show");
   }, 10);
 
-  // Auto hide after 5 seconds
   setTimeout(() => {
     hideNotification();
   }, 5000);
@@ -29,7 +23,6 @@ function hideNotification() {
   }, 300);
 }
 
-// Display properties in a container
 async function displayProperties(containerId, filterOptions = {}) {
   const container = document.getElementById(containerId);
   if (!container) {
@@ -37,15 +30,11 @@ async function displayProperties(containerId, filterOptions = {}) {
     return;
   }
 
-  // Clear container
   container.innerHTML = "";
 
-  // Load properties
   let properties = await loadProperties();
   console.log("Loaded properties:", properties.length);
 
-  // For marketplace, only show properties that are available for sale or rent
-  // unless specific status filter is provided
   if (!filterOptions.status) {
     properties = properties.filter(
       (p) => p.status === "FOR_SALE" || p.status === "FOR_RENT"
@@ -56,7 +45,6 @@ async function displayProperties(containerId, filterOptions = {}) {
     );
   }
 
-  // Apply filters
   if (filterOptions.status) {
     properties = properties.filter((p) => p.status === filterOptions.status);
     console.log("After status filter:", properties.length);
@@ -85,7 +73,6 @@ async function displayProperties(containerId, filterOptions = {}) {
     );
   }
 
-  // Sort properties
   if (filterOptions.sortBy === "price-low") {
     properties.sort((a, b) => a.price - b.price);
   } else if (filterOptions.sortBy === "price-high") {
@@ -94,25 +81,21 @@ async function displayProperties(containerId, filterOptions = {}) {
 
   console.log("Final properties to display:", properties.length);
 
-  // Create property cards
   properties.forEach((property) => {
     const propertyCard = createPropertyCard(property);
     container.appendChild(propertyCard);
   });
 
-  // If no properties found
   if (properties.length === 0) {
     container.innerHTML =
       '<p class="no-results">No properties found matching your criteria.</p>';
   }
 }
 
-// Display user properties in a container
 async function displayUserProperties(containerId, filterOptions = {}) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  // Show loading state
   container.innerHTML = `
     <div class="loading-state">
       <div class="loading-spinner"></div>
@@ -120,7 +103,6 @@ async function displayUserProperties(containerId, filterOptions = {}) {
     </div>
   `;
 
-  // Get current user
   const currentUser = getCurrentUser();
   if (!currentUser) {
     container.innerHTML =
@@ -128,14 +110,11 @@ async function displayUserProperties(containerId, filterOptions = {}) {
     return;
   }
 
-  // Initialize user property arrays if they don't exist
   if (!currentUser.ownedProperties) currentUser.ownedProperties = [];
   if (!currentUser.rentedProperties) currentUser.rentedProperties = [];
 
-  // Load all properties
   let properties = await loadProperties();
 
-  // Filter properties based on user ownership (only owned and rented)
   properties = properties.filter((property) => {
     const isOwned =
       currentUser.ownedProperties.includes(property.id) &&
@@ -146,7 +125,6 @@ async function displayUserProperties(containerId, filterOptions = {}) {
     return isOwned || isRented;
   });
 
-  // Apply additional filters from filterOptions
   if (filterOptions.type) {
     properties = properties.filter((p) => p.type === filterOptions.type);
   }
@@ -161,7 +139,6 @@ async function displayUserProperties(containerId, filterOptions = {}) {
     );
   }
 
-  // Apply search filter
   if (filterOptions.search) {
     const searchTerm = filterOptions.search.toLowerCase();
     properties = properties.filter(
@@ -172,20 +149,16 @@ async function displayUserProperties(containerId, filterOptions = {}) {
     );
   }
 
-  // Sort properties
   if (filterOptions.sortBy === "price-low") {
     properties.sort((a, b) => a.price - b.price);
   } else if (filterOptions.sortBy === "price-high") {
     properties.sort((a, b) => b.price - a.price);
   }
 
-  // Clear container and add staggered animation
   container.innerHTML = "";
 
-  // Update statistics
   updatePropertyStats(currentUser, properties);
 
-  // Create property cards with staggered animation
   if (properties.length > 0) {
     properties.forEach((property, index) => {
       const propertyCard = createUserPropertyCard(property);
@@ -193,7 +166,6 @@ async function displayUserProperties(containerId, filterOptions = {}) {
       propertyCard.style.transform = "translateY(20px)";
       container.appendChild(propertyCard);
 
-      // Staggered animation
       setTimeout(() => {
         propertyCard.style.transition =
           "opacity 0.5s ease, transform 0.5s ease";
@@ -215,19 +187,16 @@ async function displayUserProperties(containerId, filterOptions = {}) {
   }
 }
 
-// Create a property card element
 function createPropertyCard(property) {
   const card = document.createElement("div");
   card.className = "grid-item";
   card.setAttribute("data-property-id", property.id);
 
-  // Format price
   const formattedPrice = formatRupiah(property.price);
   const formattedPricePerMonth = property.pricePerMonth
     ? formatRupiah(property.pricePerMonth) + "/month"
     : "";
 
-  // Check if property is in favorites
   const isFavorite = isPropertyInFavorites(property.id);
 
   card.innerHTML = `
@@ -243,16 +212,13 @@ function createPropertyCard(property) {
     </div>
   `;
 
-  // Set background image
   card.style.backgroundImage = `url('${
     property.mainImage || "img/prop1.jpg"
   }')`;
   card.style.backgroundSize = "cover";
   card.style.backgroundPosition = "center";
 
-  // Add click event to show overlay
   card.addEventListener("click", (e) => {
-    // Don't trigger if clicking favorite button
     if (e.target.closest(".favorite-banner")) {
       e.stopPropagation();
       return;
@@ -260,13 +226,11 @@ function createPropertyCard(property) {
     showPropertyOverlay(property);
   });
 
-  // Add click event for favorite button
   const favoriteBtn = card.querySelector(".favorite-banner");
   favoriteBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // Check if user is logged in first
     const currentUser = getCurrentUser();
     if (!currentUser) {
       showNotification("Please log in to manage favorites", "warning");
@@ -283,7 +247,6 @@ function createPropertyCard(property) {
           await updateFavoritesCount();
           showNotification("Property removed from favorites", "success");
 
-          // Update overlay button if overlay is open for this property
           const overlay = document.querySelector("#propertyOverlay");
           if (overlay && overlay.style.visibility === "visible") {
             const overlayBtn = overlay.querySelector(".add-to-favorites");
@@ -307,7 +270,6 @@ function createPropertyCard(property) {
           await updateFavoritesCount();
           showNotification("Property added to favorites", "success");
 
-          // Update overlay button if overlay is open for this property
           const overlay = document.querySelector("#propertyOverlay");
           if (overlay && overlay.style.visibility === "visible") {
             const overlayBtn = overlay.querySelector(".add-to-favorites");
@@ -337,26 +299,22 @@ function createPropertyCard(property) {
   return card;
 }
 
-// Create a user property card element (matching favorites page style exactly)
 function createUserPropertyCard(property) {
   const card = document.createElement("div");
   card.className = "grid-item";
   card.setAttribute("data-property-id", property.id);
 
-  // Format price
   const formattedPrice = formatRupiah(property.price);
   const formattedPricePerMonth = property.pricePerMonth
     ? formatRupiah(property.pricePerMonth) + "/month"
     : "";
 
-  // Set background image
   card.style.backgroundImage = `url('${
     property.mainImage || "img/prop1.jpg"
   }')`;
   card.style.backgroundSize = "cover";
   card.style.backgroundPosition = "center";
 
-  // Build the card HTML structure (exactly like favorites page)
   card.innerHTML = `
     <div class="grid-item-footer">
       <small>${property.location}</small>
@@ -367,7 +325,6 @@ function createUserPropertyCard(property) {
     </div>
   `;
 
-  // Add click event to show overlay
   card.addEventListener("click", (e) => {
     showPropertyOverlay(property);
   });
@@ -375,7 +332,6 @@ function createUserPropertyCard(property) {
   return card;
 }
 
-// Update property statistics in the header
 function updatePropertyStats(currentUser, allUserProperties) {
   if (!currentUser) return;
 
@@ -386,7 +342,6 @@ function updatePropertyStats(currentUser, allUserProperties) {
     (p) => p.status === "RENTED"
   ).length;
 
-  // Update the DOM elements if they exist
   const ownedElement = document.getElementById("ownedCount");
   const rentedElement = document.getElementById("rentedCount");
 
@@ -398,7 +353,6 @@ function updatePropertyStats(currentUser, allUserProperties) {
   }
 }
 
-// Animate number changes
 function animateNumber(element, targetNumber) {
   const startNumber = parseInt(element.textContent) || 0;
   const increment = targetNumber > startNumber ? 1 : -1;
@@ -416,7 +370,6 @@ function animateNumber(element, targetNumber) {
   }, stepTime);
 }
 
-// Display property details
 async function displayPropertyDetails(propertyId) {
   const property = await getPropertyById(propertyId);
   if (!property) {
@@ -424,27 +377,22 @@ async function displayPropertyDetails(propertyId) {
     return;
   }
 
-  // Update page title
   document.title = `Safestate - ${property.name}`;
 
-  // Format prices
   const formattedPrice = formatRupiah(property.price);
   const formattedPricePerMonth = property.pricePerMonth
     ? formatRupiah(property.pricePerMonth) + "/month"
     : "";
 
-  // Update property details
   const nameElement = document.querySelector(".property-name");
   if (nameElement) nameElement.textContent = property.name;
 
   const locationElement = document.querySelector(".property-location");
   if (locationElement) locationElement.textContent = property.location;
 
-  // Update status element if it exists
   const statusElement = document.querySelector(".status");
   if (statusElement) statusElement.textContent = property.status;
 
-  // Update contract information if it exists
   const contractElement = document.querySelector(".contract");
   if (contractElement && property.contractEndDate) {
     const contractDate = new Date(property.contractEndDate);
@@ -469,7 +417,6 @@ async function displayPropertyDetails(propertyId) {
         : formattedPrice;
   }
 
-  // Update specifications table
   const specTable = document.querySelector(
     ".property-details-tables table:first-child"
   );
@@ -481,7 +428,6 @@ async function displayPropertyDetails(propertyId) {
     specTable.innerHTML = specHtml;
   }
 
-  // Update facilities table
   const facilityTable = document.querySelector(
     ".property-details-tables table:nth-child(4)"
   );
@@ -503,7 +449,6 @@ async function displayPropertyDetails(propertyId) {
     facilityTable.innerHTML = facilityHtml;
   }
 
-  // Update nearby attractions
   const nearbyTable = document.querySelector(
     ".property-details-tables table:nth-child(6)"
   );
@@ -520,7 +465,6 @@ function showPropertyOverlay(property) {
   const overlay = document.querySelector("#propertyOverlay");
   if (!overlay) return;
 
-  // Update overlay content with property details
   const formattedPrice = formatRupiah(property.price);
   const formattedPricePerMonth = property.pricePerMonth
     ? formatRupiah(property.pricePerMonth) + "/month"
@@ -538,18 +482,15 @@ function showPropertyOverlay(property) {
   overlay.querySelector(".price strong").textContent =
     property.status === "FOR_RENT" ? formattedPricePerMonth : formattedPrice;
 
-  // Update agent image
   const agentPhoto = overlay.querySelector(".agent-photo");
   if (agentPhoto) {
     agentPhoto.src = property.agentImage || "img/agent.png";
   }
 
-  // Update main image
   const mainImage = overlay.querySelector(".main-image");
   mainImage.src = property.mainImage || "img/prop1.jpg";
   mainImage.alt = property.name;
 
-  // Update thumbnails
   const thumbnailContainer = overlay.querySelector(".image-thumbnails");
   if (thumbnailContainer && property.thumbnails) {
     thumbnailContainer.innerHTML = property.thumbnails
@@ -557,7 +498,6 @@ function showPropertyOverlay(property) {
       .join("");
   }
 
-  // Update specifications table
   const specTable = overlay.querySelector(".property-details-tables table");
   if (specTable) {
     specTable.innerHTML = `
@@ -568,7 +508,6 @@ function showPropertyOverlay(property) {
     `;
   }
 
-  // Update facilities table
   const facilitiesTable = overlay.querySelector(
     ".property-details-tables table:nth-child(4)"
   );
@@ -593,7 +532,6 @@ function showPropertyOverlay(property) {
     `;
   }
 
-  // Update nearby attractions table
   const nearbyTable = overlay.querySelector(
     ".property-details-tables table:nth-child(6)"
   );
@@ -614,23 +552,18 @@ function showPropertyOverlay(property) {
     `;
   }
 
-  // Update Buy Now button with property ID and handle favorites
   const buyNowBtn = overlay.querySelector(".buy-now");
   const addToFavoritesBtn = overlay.querySelector(".add-to-favorites");
 
-  // Check current page to determine behavior
   const currentPage = window.location.pathname.split("/").pop();
 
   if (currentPage === "properties.html") {
-    // Hide buttons on properties page
     if (addToFavoritesBtn) addToFavoritesBtn.style.display = "none";
     if (buyNowBtn) buyNowBtn.style.display = "none";
   } else {
-    // Show buttons on marketplace and favorites pages
     if (addToFavoritesBtn) {
       addToFavoritesBtn.style.display = "flex";
 
-      // Update favorites button state
       const isFavorited = isPropertyInFavorites(property.id);
       if (isFavorited) {
         addToFavoritesBtn.innerHTML =
@@ -642,11 +575,9 @@ function showPropertyOverlay(property) {
         addToFavoritesBtn.classList.remove("favorited");
       }
 
-      // Remove any existing event listeners
       addToFavoritesBtn.replaceWith(addToFavoritesBtn.cloneNode(true));
       const newAddToFavoritesBtn = overlay.querySelector(".add-to-favorites");
 
-      // Add new event listener
       newAddToFavoritesBtn.addEventListener("click", async (e) => {
         e.preventDefault();
 
@@ -668,7 +599,6 @@ function showPropertyOverlay(property) {
               newAddToFavoritesBtn.classList.remove("favorited");
               await updateFavoritesCount();
 
-              // Update property card if visible
               const propertyCard = document.querySelector(
                 `[data-property-id="${property.id}"] .favorite-banner`
               );
@@ -676,7 +606,6 @@ function showPropertyOverlay(property) {
                 propertyCard.classList.remove("liked");
               }
 
-              // If we're on favorites page, remove the property from view
               if (currentPage === "favorites.html") {
                 const gridItem = document.querySelector(
                   `[data-property-id="${property.id}"]`
@@ -685,7 +614,6 @@ function showPropertyOverlay(property) {
                   gridItem.classList.add("removing");
                   setTimeout(() => {
                     gridItem.remove();
-                    // Check if no favorites left
                     const remainingFavorites =
                       document.querySelectorAll(".grid-item");
                     if (remainingFavorites.length === 0) {
@@ -715,7 +643,6 @@ function showPropertyOverlay(property) {
               newAddToFavoritesBtn.classList.add("favorited");
               await updateFavoritesCount();
 
-              // Update property card if visible
               const propertyCard = document.querySelector(
                 `[data-property-id="${property.id}"] .favorite-banner`
               );
@@ -744,7 +671,6 @@ function showPropertyOverlay(property) {
     }
   }
 
-  // Show overlay
   overlay.classList.add("show");
   document.body.classList.add("no-scroll");
 }
@@ -757,30 +683,25 @@ function closeOverlay() {
   document.body.classList.remove("no-scroll");
 }
 
-// Add event listener for close button and click outside
 document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.querySelector(".close-overlay");
   if (closeBtn) {
     closeBtn.addEventListener("click", closeOverlay);
   }
 
-  // Add notification close button event listener
   const notificationCloseBtn = document.querySelector(".notification-close");
   if (notificationCloseBtn) {
     notificationCloseBtn.addEventListener("click", hideNotification);
   }
 
-  // Add click outside to close overlay
   const overlay = document.querySelector("#propertyOverlay");
   if (overlay) {
     overlay.addEventListener("click", (e) => {
-      // Close if clicking the overlay background, not the content
       if (e.target === overlay) {
         closeOverlay();
       }
     });
 
-    // Prevent closing when clicking inside the overlay content
     const overlayContent = overlay.querySelector(".overlay-content");
     if (overlayContent) {
       overlayContent.addEventListener("click", (e) => {

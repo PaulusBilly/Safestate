@@ -1,21 +1,15 @@
-// Payment calculation functions
-
-// Custom notification system
 function showNotification(message, type = "info") {
   const notification = document.getElementById("notification");
   const messageElement = notification.querySelector(".notification-message");
 
-  // Set message and type
   messageElement.textContent = message;
   notification.className = `notification ${type}`;
 
-  // Show notification
   notification.classList.remove("hidden");
   setTimeout(() => {
     notification.classList.add("show");
   }, 10);
 
-  // Auto hide after 5 seconds
   setTimeout(() => {
     hideNotification();
   }, 5000);
@@ -29,9 +23,7 @@ function hideNotification() {
   }, 300);
 }
 
-// Initialize payment page
 async function initializePaymentPage() {
-  // Get property ID from URL
   const urlParams = new URLSearchParams(window.location.search);
   const propertyId = urlParams.get("id");
 
@@ -46,7 +38,6 @@ async function initializePaymentPage() {
     return;
   }
 
-  // Get property details
   const property = await getPropertyById(propertyId);
   if (!property) {
     showNotification(
@@ -59,7 +50,6 @@ async function initializePaymentPage() {
     return;
   }
 
-  // Update property info in payment page
   const propertyNameElement = document.querySelector(".property-name");
   if (propertyNameElement) propertyNameElement.textContent = property.name;
 
@@ -71,14 +61,12 @@ async function initializePaymentPage() {
   if (propertyPriceElement)
     propertyPriceElement.textContent = formatRupiah(property.price);
 
-  // Update property images
   const propertyImageElement = document.querySelector(".property-image");
   if (propertyImageElement) {
     propertyImageElement.src = property.mainImage || "img/prop1.jpg";
     propertyImageElement.alt = property.name;
   }
 
-  // Update thumbnails
   const thumbnails = document.querySelectorAll(".thumbnail");
   if (property.thumbnails && property.thumbnails.length > 0) {
     thumbnails.forEach((thumbnail, index) => {
@@ -92,11 +80,8 @@ async function initializePaymentPage() {
     });
   }
 
-  // Set property price
   const propertyPrice = property.price;
   const formattedPrice = formatRupiah(propertyPrice);
-
-  // Update down payment calculation display
   const dpCalculation = document.querySelector(
     "#downPaymentDetails .calculation p:nth-child(2)"
   );
@@ -106,7 +91,6 @@ async function initializePaymentPage() {
       downPaymentAmount
     )}</strong>`;
   }
-  // Dynamically set down payment option labels
   const downGroup = document.querySelector("#downPaymentDetails .option-group");
   if (downGroup) {
     const dpLabels = downGroup.querySelectorAll("label");
@@ -126,23 +110,19 @@ async function initializePaymentPage() {
     }
   }
 
-  // Update UTJ amount
   const utjAmount = document.querySelector(".utj-amount");
   if (utjAmount) {
     utjAmount.textContent = formatRupiah(20000000);
   }
 
-  // Add event listeners for payment options
   setupPaymentListeners(propertyPrice);
 
-  // Setup notification close button
   const notificationClose = document.querySelector(".notification-close");
   if (notificationClose) {
     notificationClose.addEventListener("click", hideNotification);
   }
 }
 
-// Setup payment option listeners
 function setupPaymentListeners(propertyPrice) {
   const downPaymentRadio = document.querySelectorAll(
     'input[name="payment"]'
@@ -153,33 +133,29 @@ function setupPaymentListeners(propertyPrice) {
   const totalPaymentElement = document.querySelector(".payment-summary strong");
   const remainingAmountElement = document.querySelector(".remaining-amount");
 
-  // Down payment amount options
   const dpAmountOptions = document.querySelectorAll('input[name="dpAmount"]');
 
-  // Down payment method options
   const dpMethodOptions = document.querySelectorAll('input[name="dpMethod"]');
 
-  // Initialize selected options
   let selectedPayment = null;
   let selectedDpAmount = null;
   let selectedDpMethod = null;
 
-  // Update total payment and remaining amount
   function updateTotalPayment() {
     let totalAmount = 0;
     let remainingAmount = propertyPrice;
 
     if (selectedPayment === "downPayment") {
       if (selectedDpAmount === "full") {
-        totalAmount = Math.floor(propertyPrice * 0.2); // Using floor to avoid decimals
+        totalAmount = Math.floor(propertyPrice * 0.2);
       } else if (selectedDpAmount === "3x") {
-        totalAmount = Math.floor((propertyPrice * 0.2) / 3); // Using floor to avoid decimals
+        totalAmount = Math.floor((propertyPrice * 0.2) / 3);
       } else if (selectedDpAmount === "5x") {
-        totalAmount = Math.floor((propertyPrice * 0.2) / 5); // Using floor to avoid decimals
+        totalAmount = Math.floor((propertyPrice * 0.2) / 5);
       }
       remainingAmount = propertyPrice - Math.floor(propertyPrice * 0.2);
     } else if (selectedPayment === "utj") {
-      totalAmount = 20000000; // Fixed UTJ amount
+      totalAmount = 20000000;
       remainingAmount = propertyPrice - 20000000;
     }
 
@@ -191,7 +167,6 @@ function setupPaymentListeners(propertyPrice) {
       remainingAmountElement.textContent = formatRupiah(remainingAmount);
     }
 
-    // Update receipt amount (find the last readonly input which should be the amount)
     const receiptInputs = document.querySelectorAll(
       ".receipt-form input[readonly]"
     );
@@ -200,14 +175,12 @@ function setupPaymentListeners(propertyPrice) {
       receiptAmount.value = formatRupiah(totalAmount);
     }
 
-    // Update success message amount
     const successAmount = document.querySelector(".success-container p strong");
     if (successAmount) {
       successAmount.textContent = formatRupiah(totalAmount);
     }
   }
 
-  // Down payment radio
   downPaymentRadio.addEventListener("click", () => {
     if (selectedPayment === "downPayment") {
       downPaymentRadio.checked = false;
@@ -221,7 +194,6 @@ function setupPaymentListeners(propertyPrice) {
     updateTotalPayment();
   });
 
-  // Tanda Jadi radio
   tandaJadiRadio.addEventListener("click", () => {
     if (selectedPayment === "utj") {
       tandaJadiRadio.checked = false;
@@ -235,7 +207,6 @@ function setupPaymentListeners(propertyPrice) {
     updateTotalPayment();
   });
 
-  // Down payment amount options
   dpAmountOptions.forEach((option) => {
     option.addEventListener("change", () => {
       selectedDpAmount = option.value;
@@ -243,11 +214,9 @@ function setupPaymentListeners(propertyPrice) {
     });
   });
 
-  // Down payment method options
   dpMethodOptions.forEach((option) => {
     option.addEventListener("change", () => {
       selectedDpMethod = option.value;
-      // Enable continue button if both amount and method are selected
       const continueButton = document.querySelector(".continue-button");
       if (continueButton && selectedDpAmount && selectedDpMethod) {
         continueButton.disabled = false;
@@ -255,7 +224,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   });
 
-  // Continue button
   const continueButton = document.querySelector(".continue-button");
   if (continueButton) {
     continueButton.addEventListener("click", () => {
@@ -275,7 +243,6 @@ function setupPaymentListeners(propertyPrice) {
         return;
       }
 
-      // Show payment overlay
       const paymentOverlay = document.getElementById("paymentOverlay");
       if (paymentOverlay) {
         paymentOverlay.classList.remove("hidden");
@@ -283,7 +250,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   }
 
-  // Cancel button
   const cancelButton = document.getElementById("cancelButton");
   if (cancelButton) {
     cancelButton.addEventListener("click", () => {
@@ -294,7 +260,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   }
 
-  // Confirm payment button
   const confirmButton = document.querySelector(".confirm-button");
   if (confirmButton) {
     confirmButton.addEventListener("click", async () => {
@@ -305,14 +270,12 @@ function setupPaymentListeners(propertyPrice) {
         paymentOverlay.classList.add("hidden");
         successOverlay.classList.remove("hidden");
 
-        // Update receipt details with actual values
         updateReceiptDetails(
           selectedPayment,
           selectedDpAmount,
           selectedDpMethod
         );
 
-        // Add property to user's owned properties
         const urlParams = new URLSearchParams(window.location.search);
         const propertyId = urlParams.get("id");
         const currentUser = getCurrentUser();
@@ -339,7 +302,6 @@ function setupPaymentListeners(propertyPrice) {
     });
   }
 
-  // Success close button
   const successCloseButton = document.getElementById("successCloseButton");
   if (successCloseButton) {
     successCloseButton.addEventListener("click", () => {
@@ -351,7 +313,6 @@ function setupPaymentListeners(propertyPrice) {
   }
 }
 
-// Update receipt details with accurate information
 function updateReceiptDetails(paymentType, dpAmount, dpMethod) {
   const receiptInputs = document.querySelectorAll(
     ".receipt-form input[readonly]"
@@ -359,25 +320,23 @@ function updateReceiptDetails(paymentType, dpAmount, dpMethod) {
   const currentDate = new Date().toLocaleDateString("en-GB");
 
   if (receiptInputs.length >= 7) {
-    receiptInputs[0].value = currentDate; // Date
+    receiptInputs[0].value = currentDate;
     receiptInputs[1].value =
       paymentType === "downPayment"
         ? "Down Payment"
-        : "Earnest Money (Uang Tanda Jadi)"; // Payment Option
+        : "Earnest Money (Uang Tanda Jadi)";
     receiptInputs[2].value =
       dpMethod === "credit"
         ? "Credit Card"
         : dpMethod === "debit"
         ? "Debit Card"
-        : "Not Specified"; // Payment Method
-    receiptInputs[3].value = "**** **** **** 1234"; // Card Number (placeholder)
-    receiptInputs[4].value = "John Doe"; // Cardholder Name (placeholder)
-    receiptInputs[5].value = "johndoe@example.com"; // Email (placeholder)
-    // receiptInputs[6] is amount - already updated in updateTotalPayment
+        : "Not Specified";
+    receiptInputs[3].value = "**** **** **** 1234";
+    receiptInputs[4].value = "John Doe";
+    receiptInputs[5].value = "johndoe@example.com";
   }
 }
 
-// Function to handle initial page load error if no property ID
 function handleMissingProperty() {
   document.body.innerHTML = `
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
@@ -390,14 +349,11 @@ function handleMissingProperty() {
   `;
 }
 
-// Initialize payment page when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize navbar
   if (typeof updateNavigation === "function") {
     updateNavigation();
   }
 
-  // Ensure no radio buttons are checked by default
   document.querySelectorAll('input[type="radio"]').forEach((radio) => {
     radio.checked = false;
   });

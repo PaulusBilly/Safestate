@@ -33,7 +33,6 @@
       </div>
     </div>
 
-    <!-- Page Header -->
     <div class="page-header">
       <div class="page-header-content">
         <h1>My Properties</h1>
@@ -67,7 +66,6 @@
     </div>
 
     <div class="property-card" style="display: none;">
-      <!-- This is a template card that will be hidden and replaced with dynamically loaded cards -->
       <div class="property-image">
         <div class="property-meta">
           <span><i class="fa-solid fa-bed"></i> 3</span>
@@ -87,7 +85,6 @@
     </div>
     
     <div id="properties-container" class="properties-grid">
-      <!-- Property cards will be dynamically loaded here -->
     </div>
     
     <div class="filter-panel">
@@ -123,7 +120,6 @@
         <button class="apply-filter" onclick="redirectToMarketplace()">Browse Marketplace</button>
         </div>
 
-<!-- Property Detail Overlay -->
 <div class="overlay" id="propertyOverlay">
   <div class="overlay-content">
     <button class="close-overlay" onclick="closeOverlay()"><i class="fas fa-times"></i></button>
@@ -202,12 +198,9 @@
 <script src="js/user-properties.js"></script>
 <script src="js/property-display.js"></script>
 <script>
-  // Initialize components
   document.addEventListener('DOMContentLoaded', async () => {
-    // Update favorites count
     await updateFavoritesCount();
     
-    // Fix cart link to point to favorites.html
     const cartLinks = document.querySelectorAll('.cart-icon');
     cartLinks.forEach(cartLink => {
       if (cartLink) {
@@ -215,31 +208,27 @@
       }
     });
     
-    // Get current user
     const currentUser = getCurrentUser();
     if (!currentUser) {
-      // Redirect to login if not logged in
       window.location.href = 'account.html';
       return;
     }
     
-    // Initialize user property arrays if they don't exist
     if (!currentUser.ownedProperties) {
-      currentUser.ownedProperties = ["prop-001", "prop-004"]; // For demo purposes
+      currentUser.ownedProperties = ["prop-001", "prop-004"];
       await updateUserProfile(currentUser.id, { ownedProperties: currentUser.ownedProperties });
     }
     
     if (!currentUser.boughtProperties) {
-      currentUser.boughtProperties = ["prop-006", "prop-020"]; // For demo purposes
+      currentUser.boughtProperties = ["prop-006", "prop-020"];
       await updateUserProfile(currentUser.id, { boughtProperties: currentUser.boughtProperties });
     }
     
     if (!currentUser.rentedProperties) {
-      currentUser.rentedProperties = ["prop-024"]; // For demo purposes
+      currentUser.rentedProperties = ["prop-024"];
       await updateUserProfile(currentUser.id, { rentedProperties: currentUser.rentedProperties });
     }
     
-    // Add search functionality for user properties
     const searchInput = document.querySelector('.search-wrapper input');
     if (searchInput) {
       searchInput.addEventListener('input', debounce(async () => {
@@ -250,17 +239,14 @@
       }, 300));
     }
     
-    // Add filter functionality to redirect to marketplace
     const applyFilterBtn = document.querySelector('.apply-filter');
     if (applyFilterBtn) {
-      applyFilterBtn.removeEventListener('click', () => {}); // Remove existing listener
+      applyFilterBtn.removeEventListener('click', () => {}); 
     }
     
-    // Display user properties
     await displayUserProperties('properties-container');
   });
   
-  // Debounce function to limit how often the search handler runs
   function debounce(func, wait) {
     let timeout;
     return function() {
@@ -273,7 +259,6 @@
     };
   }
 
-  // Redirect to marketplace with filters
   function redirectToMarketplace() {
     const price = document.getElementById('marketplacePrice').value;
     const size = document.getElementById('marketplaceSize').value;

@@ -1,6 +1,3 @@
-// Data management utilities
-
-// Load properties data
 async function loadProperties() {
   try {
     console.log("Loading properties from data/properties.json");
@@ -17,9 +14,7 @@ async function loadProperties() {
   }
 }
 
-// Load users data (in a real app, this would be server-side)
 async function loadUsers() {
-  // For development only - in production this would be handled server-side
   const storedUsers = localStorage.getItem("users");
   if (storedUsers) {
     return JSON.parse(storedUsers);
@@ -28,7 +23,6 @@ async function loadUsers() {
   try {
     const response = await fetch("data/users.json");
     const data = await response.json();
-    // Store in localStorage for persistence
     localStorage.setItem("users", JSON.stringify(data));
     return data;
   } catch (error) {
@@ -37,7 +31,6 @@ async function loadUsers() {
   }
 }
 
-// Get property by ID
 async function getPropertyById(propertyId) {
   const properties = await loadProperties();
   return properties.find(
@@ -46,13 +39,11 @@ async function getPropertyById(propertyId) {
   );
 }
 
-// Get properties by status
 async function getPropertiesByStatus(status) {
   const properties = await loadProperties();
   return properties.filter((property) => property.status === status);
 }
 
-// Format price as Indonesian Rupiah
 function formatRupiah(amount) {
   return "Rp" + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

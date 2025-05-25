@@ -1,4 +1,3 @@
-// Search and Filter functionality
 class SearchAndFilter {
   constructor() {
     this.initializeElements();
@@ -20,7 +19,6 @@ class SearchAndFilter {
     this.searchInput = document.querySelector(".search-wrapper input");
     this.searchIcon = document.querySelector(".search-icon");
 
-    // Filter dropdowns
     this.priceSelect = document.querySelector(
       ".filter-panel select:nth-of-type(1)"
     );
@@ -36,7 +34,6 @@ class SearchAndFilter {
   }
 
   attachEventListeners() {
-    // Filter panel toggle
     if (this.filterIcon) {
       this.filterIcon.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -51,7 +48,6 @@ class SearchAndFilter {
       });
     }
 
-    // Close filter panel when clicking outside
     document.addEventListener("click", (event) => {
       if (
         this.filterPanel &&
@@ -63,14 +59,12 @@ class SearchAndFilter {
       }
     });
 
-    // Prevent filter panel from closing when clicking inside
     if (this.filterPanel) {
       this.filterPanel.addEventListener("click", (e) => {
         e.stopPropagation();
       });
     }
 
-    // Search functionality
     if (this.searchInput) {
       this.searchInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
@@ -85,14 +79,12 @@ class SearchAndFilter {
       });
     }
 
-    // Apply filter button
     if (this.applyBtn) {
       this.applyBtn.addEventListener("click", () => {
         this.applyFilters();
       });
     }
 
-    // Real-time filter updates
     if (this.priceSelect) {
       this.priceSelect.addEventListener("change", () => {
         this.currentFilters.price = this.priceSelect.value;
@@ -133,7 +125,6 @@ class SearchAndFilter {
   navigateToMarketplace() {
     const currentPage = window.location.pathname.split("/").pop();
 
-    // Create URL with search parameters
     const params = new URLSearchParams();
 
     if (this.currentFilters.search) {
@@ -154,14 +145,11 @@ class SearchAndFilter {
 
     const queryString = params.toString();
 
-    // Always redirect to marketplace, never filter in place on properties page
     if (currentPage !== "marketplace.html") {
-      // If we're not on marketplace.html, navigate there
       window.location.href = `marketplace.html${
         queryString ? "?" + queryString : ""
       }`;
     } else {
-      // If we're already on marketplace, just update the URL and filter
       const newUrl = `${window.location.pathname}${
         queryString ? "?" + queryString : ""
       }`;
@@ -171,7 +159,6 @@ class SearchAndFilter {
   }
 
   async filterPropertiesOnPage() {
-    // Only filter if we're on marketplace page
     const currentPage = window.location.pathname.split("/").pop();
     if (currentPage !== "marketplace.html") return;
 
@@ -179,10 +166,8 @@ class SearchAndFilter {
     if (!container) return;
 
     try {
-      // Load all properties
       let properties = await loadProperties();
 
-      // Apply search filter
       if (this.currentFilters.search) {
         const searchTerm = this.currentFilters.search.toLowerCase();
         properties = properties.filter(
@@ -193,7 +178,6 @@ class SearchAndFilter {
         );
       }
 
-      // Apply price filter
       if (this.currentFilters.price) {
         if (this.currentFilters.price === "low") {
           properties.sort((a, b) => a.price - b.price);
@@ -202,7 +186,6 @@ class SearchAndFilter {
         }
       }
 
-      // Apply size filter
       if (this.currentFilters.size) {
         if (this.currentFilters.size === "smallest") {
           properties.sort((a, b) => a.size.building - b.size.building);
@@ -211,7 +194,6 @@ class SearchAndFilter {
         }
       }
 
-      // Apply type filter
       if (this.currentFilters.type) {
         properties = properties.filter(
           (property) =>
@@ -220,7 +202,6 @@ class SearchAndFilter {
         );
       }
 
-      // Apply rent/buy filter
       if (this.currentFilters.rentBuy) {
         if (this.currentFilters.rentBuy === "rent") {
           properties = properties.filter(
@@ -233,7 +214,6 @@ class SearchAndFilter {
         }
       }
 
-      // Clear container and display filtered properties
       container.innerHTML = "";
 
       if (properties.length === 0) {
@@ -252,7 +232,6 @@ class SearchAndFilter {
     }
   }
 
-  // Load filters from URL parameters
   loadFiltersFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -262,7 +241,6 @@ class SearchAndFilter {
     this.currentFilters.type = urlParams.get("type") || "";
     this.currentFilters.rentBuy = urlParams.get("rentBuy") || "";
 
-    // Update UI elements with loaded filters
     if (this.searchInput && this.currentFilters.search) {
       this.searchInput.value = this.currentFilters.search;
     }
@@ -285,7 +263,6 @@ class SearchAndFilter {
   }
 }
 
-// Overlay functions (keep existing functionality)
 function openOverlay() {
   const overlay = document.querySelector(".overlay");
   if (overlay) {
@@ -300,18 +277,15 @@ function closeOverlay() {
   }
 }
 
-// Initialize search and filter when DOM is loaded
 let searchAndFilter;
 
 document.addEventListener("DOMContentLoaded", () => {
   searchAndFilter = new SearchAndFilter();
 
-  // Load filters from URL and apply them based on current page
   const currentPage = window.location.pathname.split("/").pop();
 
   if (currentPage === "marketplace.html") {
     searchAndFilter.loadFiltersFromURL();
-    // Apply filters after properties are loaded
     setTimeout(() => {
       searchAndFilter.filterPropertiesOnPage();
     }, 100);

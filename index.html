@@ -128,21 +128,15 @@
   <script src="js/data.js"></script>
   <script src="js/favorites.js"></script>
   <script>
-    // Initialize components
     document.addEventListener("DOMContentLoaded", async () => {
-      // Update favorites count
       await updateFavoritesCount();
 
-      // Fix cart link to point to favorites.html
       const cartLinks = document.querySelectorAll(".cart-icon");
       cartLinks.forEach((cartLink) => {
         if (cartLink) {
           cartLink.href = "favorites.html";
         }
       });
-
-      // Initialize search and filter for index page
-      // Index page always navigates to marketplace when search/filter is applied
     });
   </script>
 </html>

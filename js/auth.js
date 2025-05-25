@@ -69,7 +69,6 @@ async function updateUserProfile(userId, updates) {
   return { success: true, user: users[userIndex] };
 }
 
-// Add property to user's owned properties when purchased
 async function addPropertyToUser(userId, propertyId, propertyType = "owned") {
   const users = await loadUsers();
   const userIndex = users.findIndex((user) => user.id === userId);
@@ -80,11 +79,9 @@ async function addPropertyToUser(userId, propertyId, propertyType = "owned") {
 
   const user = users[userIndex];
 
-  // Initialize arrays if they don't exist
   if (!user.ownedProperties) user.ownedProperties = [];
   if (!user.rentedProperties) user.rentedProperties = [];
 
-  // Add property to appropriate array
   if (propertyType === "owned" && !user.ownedProperties.includes(propertyId)) {
     user.ownedProperties.push(propertyId);
   } else if (
@@ -94,16 +91,13 @@ async function addPropertyToUser(userId, propertyId, propertyType = "owned") {
     user.rentedProperties.push(propertyId);
   }
 
-  // Update users in localStorage
   localStorage.setItem("users", JSON.stringify(users));
 
-  // Update current session
   sessionStorage.setItem("currentUser", JSON.stringify(user));
 
   return { success: true, user };
 }
 
-// Remove property from user's properties
 async function removePropertyFromUser(userId, propertyId) {
   const users = await loadUsers();
   const userIndex = users.findIndex((user) => user.id === userId);
@@ -114,7 +108,6 @@ async function removePropertyFromUser(userId, propertyId) {
 
   const user = users[userIndex];
 
-  // Remove from both arrays
   if (user.ownedProperties) {
     user.ownedProperties = user.ownedProperties.filter(
       (id) => id !== propertyId
@@ -126,10 +119,8 @@ async function removePropertyFromUser(userId, propertyId) {
     );
   }
 
-  // Update users in localStorage
   localStorage.setItem("users", JSON.stringify(users));
 
-  // Update current session
   sessionStorage.setItem("currentUser", JSON.stringify(user));
 
   return { success: true, user };

@@ -10,7 +10,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Update navigation based on login status
 function updateNavigation() {
   const accountLink = document.querySelector(".cta a");
   if (!accountLink) return;
@@ -21,7 +20,7 @@ function updateNavigation() {
     accountLink.onclick = (e) => {
       e.preventDefault();
       logoutUser();
-      updateNavigation(); // Update nav after logout
+      updateNavigation();
       window.location.href = "index.html";
     };
   } else {
@@ -31,7 +30,6 @@ function updateNavigation() {
   }
 }
 
-// Initialize navigation on page load
 document.addEventListener("DOMContentLoaded", () => {
   updateNavigation();
 });

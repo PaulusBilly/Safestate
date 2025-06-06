@@ -82,6 +82,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       cartLink.href = "favorites.html";
     }
   });
+
+  // Only run the favorites list logic on favorites.html
+  if (window.location.pathname.split("/").pop() !== "favorites.html") {
+    return;
+  }
+
   let favoritesContainer = document.getElementById("favorites-container");
   if (!favoritesContainer) {
     favoritesContainer = document.createElement("div");

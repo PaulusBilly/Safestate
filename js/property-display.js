@@ -331,7 +331,7 @@ function createUserPropertyCard(property) {
   `;
 
   card.addEventListener("click", (e) => {
-    showPropertyOverlay(property);
+    showUserPropertyOverlay(property);
   });
 
   return card;
@@ -677,6 +677,11 @@ function showPropertyOverlay(property) {
     if (buyNowBtn) {
       buyNowBtn.style.display = "flex";
       buyNowBtn.onclick = () => {
+        const currentUser = getCurrentUser();
+        if (!currentUser) {
+          showNotification("Please log in to buy a property.", "warning");
+          return;
+        }
         window.location.href = `payment.html?id=${property.id}`;
       };
     }
@@ -721,3 +726,83 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+function showUserPropertyOverlay(property) {
+  // Create or select overlay
+  let overlay = document.getElementById("userPropertyOverlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "userPropertyOverlay";
+    overlay.className = "overlay show";
+    overlay.innerHTML = `
+      <div class="overlay-content">
+        <button class="close-overlay"><i class="fas fa-times"></i></button>
+        <div class="overlay-body">
+          <div class="overlay-left">
+            <img src="" alt="Property Image" class="main-image" />
+            <div class="image-thumbnails"></div>
+          </div>
+          <div class="overlay-right">
+            <small class="label"></small>
+            <h2 class="property-title"></h2>
+            <p class="location"></p>
+            <p class="description"></p>
+            <p class="price"><strong></strong></p>
+            <div class="payment-details"></div>
+          </div>
+        </div>
+        <hr>
+        <div class="property-details-tables"></div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+  }
+  overlay.classList.add("show");
+  document.body.classList.add("no-scroll");
+
+  // Fill property info
+  overlay.querySelector(".main-image").src =
+    property.mainImage || "img/prop1.jpg";
+  overlay.querySelector(".main-image").alt = property.name;
+  overlay.querySelector(".label").textContent =
+    property.status === "RENTED" ? "RENTED" : "OWNED";
+  overlay.querySelector(".property-title").textContent = property.name;
+  overlay.querySelector(".location").textContent = property.location;
+  overlay.querySelector(".description").textContent =
+    property.description || "";
+  overlay.querySelector(".price strong").textContent =
+    property.status === "RENTED" && property.pricePerMonth
+      ? formatRupiah(property.pricePerMonth) + "/month"
+      : formatRupiah(property.price);
+
+  // Payment details
+  const currentUser = getCurrentUser();
+  let paymentDetails = null;
+  if (currentUser && currentUser.payments) {
+    paymentDetails = currentUser.payments.find(
+      (p) => p.propertyId === property.id
+    );
+  }
+  const paymentDiv = overlay.querySelector(".payment-details");
+  if (paymentDetails) {
+    let nextPayment = "-";
+    let plan = paymentDetails.plan || "-";
+    let method = paymentDetails.method || "-";
+    // You can add logic to calculate next payment date/amount based on plan
+    paymentDiv.innerHTML = `
+      <h4>Payment Details</h4>
+      <p><strong>Type:</strong> ${paymentDetails.type}</p>
+      <p><strong>Method:</strong> ${method}</p>
+      <p><strong>Plan:</strong> ${plan}</p>
+      <p><strong>Next Payment:</strong> ${nextPayment}</p>
+    `;
+  } else {
+    paymentDiv.innerHTML = "<p>No payment details found.</p>";
+  }
+
+  // Close logic
+  overlay.querySelector(".close-overlay").onclick = () => {
+    overlay.classList.remove("show");
+    document.body.classList.remove("no-scroll");
+  };
+}

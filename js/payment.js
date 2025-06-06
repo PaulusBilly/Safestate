@@ -116,7 +116,6 @@ function initializeRentalPayment(property) {
           <p><strong>Payment Method</strong></p>
           <label><input type="radio" name="rentalMethod" value="credit" /> Credit Card</label>
           <label><input type="radio" name="rentalMethod" value="debit" /> Debit Card</label>
-          <label><input type="radio" name="rentalMethod" value="transfer" /> Bank Transfer</label>
         </div>
       </div>
     `;
@@ -220,7 +219,6 @@ function initializePurchasePayment(property) {
           <p><strong>Payment Method</strong></p>
           <label><input type="radio" name="emMethod" value="credit" /> Credit Card</label>
           <label><input type="radio" name="emMethod" value="debit" /> Debit Card</label>
-          <label><input type="radio" name="emMethod" value="transfer" /> Bank Transfer</label>
         </div>
       `;
 
@@ -289,6 +287,7 @@ function setupRentalPaymentListeners(property) {
       const paymentOverlay = document.getElementById("paymentOverlay");
       if (paymentOverlay) {
         paymentOverlay.classList.remove("hidden");
+        autofillReceiptForm("rental", null, selectedRentalMethod);
       }
     });
   }
@@ -306,6 +305,7 @@ function setupRentalPaymentListeners(property) {
   const confirmButton = document.querySelector(".confirm-button");
   if (confirmButton) {
     confirmButton.addEventListener("click", async () => {
+      if (!validateConfirmPaymentForm()) return;
       const paymentOverlay = document.getElementById("paymentOverlay");
       const successOverlay = document.getElementById("successOverlay");
 
@@ -525,6 +525,11 @@ function setupPaymentListeners(propertyPrice) {
       const paymentOverlay = document.getElementById("paymentOverlay");
       if (paymentOverlay) {
         paymentOverlay.classList.remove("hidden");
+        autofillReceiptForm(
+          window.paymentData.selectedPayment,
+          window.paymentData.selectedDpAmount,
+          window.paymentData.selectedDpMethod
+        );
       }
     });
   }
@@ -542,6 +547,7 @@ function setupPaymentListeners(propertyPrice) {
   const confirmButton = document.querySelector(".confirm-button");
   if (confirmButton) {
     confirmButton.addEventListener("click", async () => {
+      if (!validateConfirmPaymentForm()) return;
       const paymentOverlay = document.getElementById("paymentOverlay");
       const successOverlay = document.getElementById("successOverlay");
 
@@ -575,24 +581,56 @@ function setupPaymentListeners(propertyPrice) {
 
         if (currentUser && propertyId) {
           try {
+            // Add this block to ensure owned properties are added after purchase
+            if (property && property.status !== "FOR_RENT") {
+              const result = await addPropertyToUser(
+                currentUser.id,
+                propertyId,
+                "owned"
+              );
+              if (result.success) {
+                console.log(
+                  "Property successfully added to user as owned:",
+                  propertyId
+                );
+              } else {
+                console.error(
+                  "Failed to add property to user:",
+                  result.message
+                );
+              }
+            }
             const propertyType =
               property && property.status === "FOR_RENT" ? "rented" : "owned";
-
-            const result = await addPropertyToUser(
-              currentUser.id,
+            const paymentDetails = {
               propertyId,
-              propertyType
-            );
-            if (result.success) {
-              console.log(
-                `Property successfully added to user as ${propertyType}:`,
-                propertyId
+              type: propertyType,
+              date: new Date().toISOString(),
+              method:
+                window.paymentData.selectedDpMethod ||
+                window.paymentData.selectedEmMethod ||
+                null,
+              plan: window.paymentData.selectedDpAmount || null,
+              nextPaymentDate: null, // You can calculate this based on plan
+              nextPaymentAmount: null, // You can calculate this based on plan
+            };
+            // Save to user record
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const userIndex = users.findIndex((u) => u.id === currentUser.id);
+            if (userIndex !== -1) {
+              if (!users[userIndex].payments) users[userIndex].payments = [];
+              users[userIndex].payments = users[userIndex].payments.filter(
+                (p) => p.propertyId !== propertyId
               );
-            } else {
-              console.error("Failed to add property to user:", result.message);
+              users[userIndex].payments.push(paymentDetails);
+              localStorage.setItem("users", JSON.stringify(users));
+              sessionStorage.setItem(
+                "currentUser",
+                JSON.stringify(users[userIndex])
+              );
             }
           } catch (error) {
-            console.error("Error adding property to user:", error);
+            console.error("Error saving payment details to user:", error);
           }
         }
 
@@ -617,63 +655,26 @@ function setupPaymentListeners(propertyPrice) {
 }
 
 function updateReceiptDetails(paymentType, dpAmount, dpMethod) {
-  const receiptInputs = document.querySelectorAll(
-    ".receipt-form input[readonly]"
-  );
-  const currentDate = new Date().toLocaleDateString("en-GB");
-
+  const receiptInputs = document.querySelectorAll(".receipt-form input");
   if (receiptInputs.length >= 7) {
-    receiptInputs[0].value = currentDate;
-
-    if (paymentType === "downPayment") {
-      receiptInputs[1].value = "Down Payment";
-      receiptInputs[2].value =
-        dpMethod === "credit"
-          ? "Credit Card"
-          : dpMethod === "debit"
-          ? "Debit Card"
-          : "Not Specified";
-    } else if (paymentType === "earnestMoney") {
-      receiptInputs[1].value = "Earnest Money";
-      const emMethod = window.paymentData.selectedEmMethod;
-      receiptInputs[2].value =
-        emMethod === "credit"
-          ? "Credit Card"
-          : emMethod === "debit"
-          ? "Debit Card"
-          : emMethod === "transfer"
-          ? "Bank Transfer"
-          : "Not Specified";
-    } else {
-      receiptInputs[1].value = "Not Specified";
+    for (let i = 0; i < receiptInputs.length - 1; i++) {
+      receiptInputs[i].value = "";
+      receiptInputs[i].readOnly = false;
     }
-
-    receiptInputs[3].value = "**** **** **** 1234";
-    receiptInputs[4].value = "John Doe";
-    receiptInputs[5].value = "johndoe@example.com";
+    const totalAmountInput = receiptInputs[receiptInputs.length - 1];
+    totalAmountInput.readOnly = true;
   }
 }
 
 function updateRentalReceiptDetails(paymentType, rentalMethod) {
-  const receiptInputs = document.querySelectorAll(
-    ".receipt-form input[readonly]"
-  );
-  const currentDate = new Date().toLocaleDateString("en-GB");
-
+  const receiptInputs = document.querySelectorAll(".receipt-form input");
   if (receiptInputs.length >= 7) {
-    receiptInputs[0].value = currentDate;
-    receiptInputs[1].value = "Security Deposit + First Month Rent";
-    receiptInputs[2].value =
-      rentalMethod === "credit"
-        ? "Credit Card"
-        : rentalMethod === "debit"
-        ? "Debit Card"
-        : rentalMethod === "transfer"
-        ? "Bank Transfer"
-        : "Not Specified";
-    receiptInputs[3].value = "**** **** **** 1234";
-    receiptInputs[4].value = "John Doe";
-    receiptInputs[5].value = "johndoe@example.com";
+    for (let i = 0; i < receiptInputs.length - 1; i++) {
+      receiptInputs[i].value = "";
+      receiptInputs[i].readOnly = false;
+    }
+    const totalAmountInput = receiptInputs[receiptInputs.length - 1];
+    totalAmountInput.readOnly = true;
   }
 }
 
@@ -700,3 +701,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initializePaymentPage();
 });
+
+function autofillReceiptForm(paymentType, dpAmount, dpMethod) {
+  const receiptInputs = document.querySelectorAll(".receipt-form input");
+  if (receiptInputs.length < 7) return;
+
+  // Date (readonly, today)
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString("en-GB");
+  receiptInputs[0].value = formattedDate;
+  receiptInputs[0].readOnly = true;
+
+  // Payment Option (readonly)
+  let paymentOption = "";
+  if (paymentType === "downPayment") paymentOption = "Down Payment";
+  else if (paymentType === "earnestMoney") paymentOption = "Earnest Money";
+  else if (paymentType === "rental") paymentOption = "Rental Payment";
+  else paymentOption = "";
+  receiptInputs[1].value = paymentOption;
+  receiptInputs[1].readOnly = true;
+
+  // Payment Method (readonly, always use checked radio)
+  let paymentMethod = "";
+  if (paymentType === "downPayment") {
+    const checked = document.querySelector('input[name="dpMethod"]:checked');
+    if (checked) {
+      paymentMethod =
+        checked.value === "credit"
+          ? "Credit Card"
+          : checked.value === "debit"
+          ? "Debit Card"
+          : "";
+    }
+  } else if (paymentType === "earnestMoney") {
+    const checked = document.querySelector('input[name="emMethod"]:checked');
+    if (checked) {
+      paymentMethod =
+        checked.value === "credit"
+          ? "Credit Card"
+          : checked.value === "debit"
+          ? "Debit Card"
+          : "";
+    }
+  } else if (paymentType === "rental") {
+    paymentMethod = dpMethod === "credit" ? "Credit Card" : "Debit Card";
+  }
+  receiptInputs[2].value = paymentMethod;
+  receiptInputs[2].readOnly = true;
+
+  // Card Number (editable, empty)
+  receiptInputs[3].value = "";
+  receiptInputs[3].readOnly = false;
+
+  // Cardholder Name (editable, empty)
+  receiptInputs[4].value = "";
+  receiptInputs[4].readOnly = false;
+
+  // Email (autofill from user, editable)
+  const currentUser = getCurrentUser();
+  receiptInputs[5].value =
+    currentUser && currentUser.email ? currentUser.email : "";
+  receiptInputs[5].readOnly = false;
+
+  // Total Amount (readonly, set by updateTotalPayment logic)
+  receiptInputs[6].readOnly = true;
+}
+
+function validateConfirmPaymentForm() {
+  const receiptInputs = document.querySelectorAll(".receipt-form input");
+  // Card Number: must be 16 digits
+  const cardNumber = receiptInputs[3].value.replace(/\s+/g, "");
+  if (!/^\d{16}$/.test(cardNumber)) {
+    showNotification("Card Number must be 16 digits.", "error");
+    return false;
+  }
+  // Cardholder Name: not empty
+  const cardName = receiptInputs[4].value.trim();
+  if (!cardName) {
+    showNotification("Cardholder Name cannot be empty.", "error");
+    return false;
+  }
+  return true;
+}

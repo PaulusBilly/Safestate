@@ -33,3 +33,15 @@ function updateNavigation() {
 document.addEventListener("DOMContentLoaded", () => {
   updateNavigation();
 });
+
+const propertiesLink = document.querySelector(
+  '.navBar .nav-left a[href="properties.html"]'
+);
+if (propertiesLink) {
+  propertiesLink.addEventListener("click", function (e) {
+    if (!isLoggedIn()) {
+      e.preventDefault();
+      showNotification("Please log in to access your properties.", "warning");
+    }
+  });
+}

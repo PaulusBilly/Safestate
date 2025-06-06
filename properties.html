@@ -12,14 +12,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="notification" class="notification hidden">
-      <div class="notification-content">
-        <i class="notification-icon"></i>
-        <span class="notification-message"></span>
-        <button class="notification-close">&times;</button>
-      </div>
-    </div>
-
     <div class="navigation">
         <div class="navBar">
           <div class="nav-left">
@@ -109,24 +101,12 @@
         <button class="apply-filter" onclick="redirectToMarketplace()">Browse Marketplace</button>
         </div>
 
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/searchbar.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/user-properties.js"></script>
+    <script src="js/properties.js"></script>
 </body>
-<script src="js/auth.js"></script>
-<script src="js/navbar.js"></script>
-<script src="js/searchbar.js"></script>
-<script src="js/data.js"></script>
-<script src="js/favorites.js"></script>
-<script src="js/user-properties.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    await updateFavoritesCount();
-    
-    const cartLinks = document.querySelectorAll('.cart-icon');
-    cartLinks.forEach(cartLink => {
-      if (cartLink) {
-        cartLink.href = 'favorites.html';
-      }
-    });
-  });
-</script>
-<script src="js/properties.js"></script>
 </html>

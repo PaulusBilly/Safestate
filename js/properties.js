@@ -53,6 +53,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   await displayRentedProperties();
 
   setupSearch();
+
+  await updateFavoritesCount();
+  const cartLinks = document.querySelectorAll(".cart-icon");
+  cartLinks.forEach((cartLink) => {
+    if (cartLink) {
+      cartLink.href = "favorites.html";
+    }
+  });
 });
 
 async function displayOwnedProperties() {

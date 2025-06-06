@@ -127,16 +127,5 @@
   <script src="js/searchbar.js"></script>
   <script src="js/data.js"></script>
   <script src="js/favorites.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      await updateFavoritesCount();
-
-      const cartLinks = document.querySelectorAll(".cart-icon");
-      cartLinks.forEach((cartLink) => {
-        if (cartLink) {
-          cartLink.href = "favorites.html";
-        }
-      });
-    });
-  </script>
+  <script src="js/index.js"></script>
 </html>

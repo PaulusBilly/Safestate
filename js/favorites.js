@@ -73,3 +73,30 @@ async function updateFavoritesCount() {
     favoritesCount.textContent = count.toString();
   }
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await updateFavoritesCount();
+  const cartLinks = document.querySelectorAll(".cart-icon");
+  cartLinks.forEach((cartLink) => {
+    if (cartLink) {
+      cartLink.href = "favorites.html";
+    }
+  });
+  let favoritesContainer = document.getElementById("favorites-container");
+  if (!favoritesContainer) {
+    favoritesContainer = document.createElement("div");
+    favoritesContainer.id = "favorites-container";
+    favoritesContainer.className = "properties-grid";
+    document.body.appendChild(favoritesContainer);
+  }
+  const favoriteProperties = await getFavoriteProperties();
+  if (favoriteProperties.length === 0) {
+    favoritesContainer.innerHTML =
+      '<p class="no-results">You have no favorite properties. Browse our <a href="marketplace.html">marketplace</a> to find properties you like.</p>';
+  } else {
+    favoriteProperties.forEach((property) => {
+      const propertyCard = createPropertyCard(property);
+      favoritesContainer.appendChild(propertyCard);
+    });
+  }
+});

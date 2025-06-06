@@ -192,6 +192,7 @@ async function displayUserProperties(containerId, filterOptions = {}) {
   }
 }
 
+// Creates a property card element with property details and click handlers
 function createPropertyCard(property) {
   const card = document.createElement("div");
   card.className = "grid-item";
@@ -358,6 +359,7 @@ function updatePropertyStats(currentUser, allUserProperties) {
   }
 }
 
+// Animates a number from its current value to a target value
 function animateNumber(element, targetNumber) {
   const startNumber = parseInt(element.textContent) || 0;
 
@@ -381,6 +383,7 @@ function animateNumber(element, targetNumber) {
   }, stepTime);
 }
 
+// Displays detailed property information in the property details page
 async function displayPropertyDetails(propertyId) {
   const property = await getPropertyById(propertyId);
   if (!property) {
@@ -472,6 +475,7 @@ async function displayPropertyDetails(propertyId) {
   }
 }
 
+// Shows the property overlay with detailed information when a property card is clicked
 function showPropertyOverlay(property) {
   const overlay = document.querySelector("#propertyOverlay");
   if (!overlay) return;
@@ -691,6 +695,7 @@ function showPropertyOverlay(property) {
   document.body.classList.add("no-scroll");
 }
 
+// Closes the property overlay
 function closeOverlay() {
   const overlay = document.querySelector("#propertyOverlay");
   if (!overlay) return;
@@ -727,6 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Shows a custom overlay for user-owned properties with payment details
 function showUserPropertyOverlay(property) {
   // Create or select overlay
   let overlay = document.getElementById("userPropertyOverlay");

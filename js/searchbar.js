@@ -263,6 +263,7 @@ class SearchAndFilter {
   }
 }
 
+// Opens the search overlay
 function openOverlay() {
   const overlay = document.querySelector(".overlay");
   if (overlay) {
@@ -270,6 +271,7 @@ function openOverlay() {
   }
 }
 
+// Closes the search overlay
 function closeOverlay() {
   const overlay = document.querySelector(".overlay");
   if (overlay) {

@@ -124,6 +124,7 @@ function initializeRentalPayment(property) {
   setupRentalPaymentListeners(property);
 }
 
+// Initializes the purchase payment flow with property details and payment options
 function initializePurchasePayment(property) {
   const propertyPriceElement = document.querySelector(".property-price strong");
   if (propertyPriceElement)
@@ -360,6 +361,7 @@ function setupRentalPaymentListeners(property) {
   }
 }
 
+// Sets up event listeners for payment options and updates total payment amount
 function setupPaymentListeners(propertyPrice) {
   const paymentRadios = document.querySelectorAll('input[name="payment"]');
   const downPaymentRadio = document.getElementById("downPaymentRadio");
@@ -379,6 +381,7 @@ function setupPaymentListeners(propertyPrice) {
     selectedEmMethod: null,
   };
 
+  // Updates the total payment amount based on selected payment options
   function updateTotalPayment() {
     let totalAmount = 0;
     let remainingAmount = propertyPrice;
@@ -419,6 +422,7 @@ function setupPaymentListeners(propertyPrice) {
     }
   }
 
+  // Hides all payment detail sections
   function hideAllPaymentDetails() {
     if (downPaymentDetails) downPaymentDetails.classList.add("hidden");
     const earnestMoneyDetails = document.getElementById("earnestMoneyDetails");

@@ -44,6 +44,7 @@ async function getPropertiesByStatus(status) {
   return properties.filter((property) => property.status === status);
 }
 
+// Formats a number into Indonesian Rupiah currency format
 function formatRupiah(amount) {
   return "Rp" + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

@@ -143,7 +143,7 @@ function createPropertyCard(property, status) {
 
   card.style.cursor = "pointer";
   card.addEventListener("click", () => {
-    window.location.href = `propertiesdetails.html?id=${property.id}`;
+    showPropertyOverlay(property);
   });
 
   let contractEndsIn = "";

@@ -1,3 +1,4 @@
+// User registration function - Creates a new user account and stores it in localStorage
 async function registerUser(username, email, password, age, city) {
   const users = await loadUsers();
 
@@ -36,6 +37,7 @@ async function loginUser(email, password) {
   }
 }
 
+// Retrieves the currently logged-in user from sessionStorage
 function getCurrentUser() {
   const userJson = sessionStorage.getItem("currentUser");
   return userJson ? JSON.parse(userJson) : null;
@@ -45,6 +47,7 @@ function logoutUser() {
   sessionStorage.removeItem("currentUser");
 }
 
+// Checks if a user is currently logged in
 function isLoggedIn() {
   return getCurrentUser() !== null;
 }
@@ -69,6 +72,7 @@ async function updateUserProfile(userId, updates) {
   return { success: true, user: users[userIndex] };
 }
 
+// Adds a property to a user's owned or rented properties list
 async function addPropertyToUser(userId, propertyId, propertyType = "owned") {
   const users = await loadUsers();
   const userIndex = users.findIndex((user) => user.id === userId);

@@ -29,6 +29,7 @@ async function getAllUserProperties() {
   return [...ownedProperties, ...rentedProperties];
 }
 
+// Checks if a property belongs to the current user (owned or rented)
 function isUserProperty(propertyId) {
   const currentUser = getCurrentUser();
   if (!currentUser) return false;

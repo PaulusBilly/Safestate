@@ -152,8 +152,46 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const city = signUpForm.querySelector('input[name="city"]').value.trim();
 
+      if (!username || !email || !password || isNaN(age) || !city) {
+        alert("All fields are required.");
+        return;
+      }
+      // Email format check
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      // Password strength check
+      if (
+        password.length < 6 ||
+        !/[A-Za-z]/.test(password) ||
+        !/\d/.test(password)
+      ) {
+        alert(
+          "Password must be at least 6 characters and contain both letters and numbers."
+        );
+        return;
+      }
+      // Age check
       if (isNaN(age) || age < 18) {
         alert("You must be at least 18 years old to register.");
+        return;
+      }
+      // City check
+      if (!city) {
+        alert("City is required.");
+        return;
+      }
+      // Username uniqueness check
+      const users = await loadUsers();
+      if (users.some((user) => user.username === username)) {
+        alert("Username already taken. Please choose another.");
+        return;
+      }
+      // Email uniqueness check (already checked in registerUser, but for instant feedback)
+      if (users.some((user) => user.email === email)) {
+        alert("Email already registered. Please use another email.");
         return;
       }
 
